@@ -6,15 +6,166 @@
 
 ## 🔧 Github Commands :-
 
-## 🛠️ Installation Steps :-
+`Step 1` : SSH Configuration.
 
-## 🧐 Features :-
+```
+ssh-keygen -t ed25519 -C "ex@gmail.com"
+```
 
-## 💻 Built with :-
+```
+cat ~/.ssh/id_ed25519.pub
+```
+
+```
+git config --global user.email "ex@gmail.com"
+```
+
+```
+git config --global user.name "ex"
+```
+
+`Step 2` : Starting Git.
+
+```
+git init
+```
+
+```
+git add .
+```
+
+```
+git commit -m "first commit"
+```
+
+```
+git branch -M main
+```
+
+```
+git remote add origin git@github.com:Ma7en/crowd-funding.git
+```
+
+```
+git push -u origin main
+```
+
+`Step 3` : Clone.
+
+```
+git clone git@github.com:Ma7en/crowd-funding.git
+```
+
+`Step 4` : Pull.
+
+```
+git pull -r origin main
+```
+
+```
+Accept Both Changes
+```
+
+```
+git rebase --continue
+```
+
+```
+git config --global pull.rebase true
+```
+
+`Step 5` : Tag.
+
+```
+git checkout main
+```
+
+```
+git tag
+```
+
+```
+git tag -a v1.0 -m "Version 1.0"
+```
+
+```
+git push origin v1.0
+```
 
 ---
 
-<!-- <h1 align="center" id="title">Contributors</h1> -->
+## 🛠️ Installation Steps :-
+
+<h3 align="center"> Ubuntu </h3>
+
+`Step 1` : Install and activate VirtualEnvironment.
+
+```
+m
+```
+
+`Step 2` : Install Packages.
+
+```
+m
+```
+
+`Step 3` : Install requiremental Packages.
+
+```
+m
+```
+
+`Step 4` : Create Database.
+
+```
+m
+```
+
+<h3 align="center"> Windows </h3>
+
+`Step 1` : Install and activate VirtualEnvironment.
+
+```
+m
+```
+
+`Step 2` : Install Packages.
+
+```
+m
+```
+
+`Step 3` : Install requiremental Packages.
+
+```
+m
+```
+
+`Step 4` : Create Database.
+
+```
+m
+```
+
+---
+
+## 🧐 Features :-
+
+---
+
+## 💻 Built with :-
+
+Technologies used in the project:
+
+-   Django Framework
+-   Postgres Database
+-   HTML
+-   CSS
+-   JS
+-   Bootstrap
+
+---
 
 ## Contributors
 
