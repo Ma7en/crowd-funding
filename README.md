@@ -101,25 +101,101 @@ git push origin v1.0
 `Step 1` : Install and activate VirtualEnvironment.
 
 ```
-m
+pip install virtualenv
+```
+
+```
+virtualenv venv
+```
+
+```
+source venv/bin/activate
 ```
 
 `Step 2` : Install Packages.
 
 ```
-m
+pip install django
+```
+
+```
+pip install --upgrade pip
+```
+
+```
+pip install psycopg2-binary
+```
+
+```
+pip install pillow
+```
+
+```
+pip install django-crispy-forms
+```
+
+```
+pip install crispy-bootstrap5
+```
+
+```
+pip install djangorestframework
 ```
 
 `Step 3` : Install requiremental Packages.
 
 ```
+pip freeze > requirements.txt
+```
+
+```
+pip install -r requirements.txt
+```
+
+`Step 4` : Create Project.
+
+```
+django-admin startproject crowdfunding
+```
+
+```
+cd crowdfunding
+```
+
+`Step 5` : Create Apps.
+
+```
+python3 manage.py startapp account
+```
+
+```
+python3 manage.py startapp home
+```
+
+`Step 6` : Create Database.
+
+```
 m
 ```
 
-`Step 4` : Create Database.
+`Step 7` : Create Migrate.
 
 ```
-m
+python3 manage.py makemigrations
+```
+
+```
+python3 manage.py migrate
+```
+
+```
+python3 manage.py createsuperuser
+```
+
+`Step 8` : Run Server.
+
+```
+python3 manage.py runserver
 ```
 
 <h3 align="center"> Windows </h3>
@@ -127,25 +203,98 @@ m
 `Step 1` : Install and activate VirtualEnvironment.
 
 ```
-m
+pip install virtualenv
+```
+
+```
+virtualenv wvenv
+```
+
+```
+wvenv\Scripts\activate
 ```
 
 `Step 2` : Install Packages.
 
 ```
-m
+pip install django
+```
+
+```
+pip install --upgrade pip
+```
+
+```
+pip install psycopg2-binary
+```
+
+```
+pip install pillow
+```
+
+```
+pip install django-crispy-forms
+```
+
+```
+pip install crispy-bootstrap5
+```
+
+```
+pip install djangorestframework
 ```
 
 `Step 3` : Install requiremental Packages.
 
 ```
+pip freeze > wrequirements.txt
+```
+
+```
+pip install -r wrequirements.txt
+
+```
+
+`Step 4` : Create Project.
+
+```
 m
 ```
 
-`Step 4` : Create Database.
+`Step 5` : Create Apps.
+
+```
+python manage.py startapp account
+```
+
+```
+python manage.py startapp home
+```
+
+`Step 6` : Create Database.
 
 ```
 m
+```
+
+`Step 7` : Create Migrate.
+
+```
+python manage.py makemigrations
+```
+
+```
+python manage.py migrate
+```
+
+```
+python manage.py createsuperuser
+```
+
+`Step 8` : Run Server.
+
+```
+python manage.py runserver
 ```
 
 ---
