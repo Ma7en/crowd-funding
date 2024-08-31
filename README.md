@@ -175,7 +175,35 @@ python3 manage.py startapp home
 `Step 6` : Create Database.
 
 ```
-m
+su - postgres
+```
+
+```
+psql
+```
+
+```
+CREATE USER django WITH PASSWORD 'mazen@@1';
+```
+
+```
+create database crowd_funding;
+```
+
+```
+GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django;
+```
+
+```
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django;
+```
+
+```
+GRANT ALL PRIVILEGES ON SCHEMA public TO django;
+```
+
+```
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO django;
 ```
 
 `Step 7` : Create Migrate.
@@ -274,7 +302,35 @@ python manage.py startapp home
 `Step 6` : Create Database.
 
 ```
-m
+su - postgres
+```
+
+```
+psql
+```
+
+```
+CREATE USER django WITH PASSWORD 'mazen@@1';
+```
+
+```
+create database crowd_funding;
+```
+
+```
+GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django;
+```
+
+```
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django;
+```
+
+```
+GRANT ALL PRIVILEGES ON SCHEMA public TO django;
+```
+
+```
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO django;
 ```
 
 `Step 7` : Create Migrate.
