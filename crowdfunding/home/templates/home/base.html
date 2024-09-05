@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CrowdFunding</title>
+
+        <!-- styles -->
+        <link
+            rel="stylesheet"
+            href="{% static 'home/bootstrap/css/bootstrap.css' %}"
+        />
+    </head>
+    <body>
+        {% include 'home/partials/header.html' %}
+
+        <main>
+            <!-- content -->
+            {% block content %} {% endblock %}
+        </main>
+
+        {% include 'home/partials/footer.html' %}
+
+        <!-- script -->
+        <script src="{% static 'home/bootstrap/js/bootstrap.js' %}"></script>
+    </body>
+</html>
