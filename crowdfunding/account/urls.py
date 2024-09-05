@@ -5,7 +5,7 @@ from .views import CreateAccount, EditAccount, ShowProfile, Logout, DeleteAccoun
 urlpatterns = [
     path("login/", Login.as_view(), name="login"),
     path("signup/", CreateAccount.as_view(), name="signup"),
-    path("accounts/profile/", ShowProfile, name="profile"),
+    path("profile/", ShowProfile, name="profile"),
     path("editprofile/<int:pk>", EditAccount.as_view(), name="editprofile"),
     path("profile/delete/<int:pk>", DeleteAccount.as_view(), name="delete_user"),
     path("logout/", Logout, name="logout"),

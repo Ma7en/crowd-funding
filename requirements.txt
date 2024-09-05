@@ -1,5 +1,6 @@
 asgiref==3.8.1
 Django==5.1.1
+django-cleanup==8.1.0
 django-crispy-forms==2.3
 django-jquery==3.1.0
 djangorestframework==3.15.2

@@ -150,6 +150,10 @@ pip install fontawesomefree
 pip install django-jquery
 ```
 
+```
+pip install django-cleanup
+```
+
 `Step 3` : Install requiremental Packages.
 
 ```
