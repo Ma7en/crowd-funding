@@ -177,15 +177,19 @@ cd crowdfunding
 `Step 5` : Create Apps.
 
 ```
-python3 manage.py startapp project
-```
-
-```
 python3 manage.py startapp account
 ```
 
 ```
+python3 manage.py startapp project
+```
+
+```
 python3 manage.py startapp home
+```
+
+```
+python3 manage.py startapp Feedback
 ```
 
 `Step 6` : Create Database.
@@ -296,6 +300,14 @@ pip install djangorestframework
 pip install fontawesomefree
 ```
 
+```
+pip install django-jquery
+```
+
+```
+pip install django-cleanup
+```
+
 `Step 3` : Install requiremental Packages.
 
 ```
@@ -320,11 +332,19 @@ cd crowdfunding
 `Step 5` : Create Apps.
 
 ```
-python manage.py startapp account
+python3 manage.py startapp account
 ```
 
 ```
-python manage.py startapp home
+python3 manage.py startapp project
+```
+
+```
+python3 manage.py startapp home
+```
+
+```
+python3 manage.py startapp Feedback
 ```
 
 `Step 6` : Create Database.
@@ -343,6 +363,10 @@ CREATE USER django_proj WITH PASSWORD 'django@@1';
 
 ```
 create database crowd_funding;
+```
+
+```
+\c crowd_funding
 ```
 
 ```
@@ -443,4 +467,3 @@ Technologies used in the project:
         </td>
     </tr>
 </table>
-```
