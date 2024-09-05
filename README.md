@@ -191,7 +191,7 @@ psql
 ```
 
 ```
-CREATE USER django WITH PASSWORD 'mazen@@1';
+CREATE USER django_proj WITH PASSWORD 'django@@1';
 ```
 
 ```
@@ -199,19 +199,19 @@ create database crowd_funding;
 ```
 
 ```
-GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django;
+GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django_proj;
 ```
 
 ```
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django_proj;
 ```
 
 ```
-GRANT ALL PRIVILEGES ON SCHEMA public TO django;
+GRANT ALL PRIVILEGES ON SCHEMA public TO django_proj;
 ```
 
 ```
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO django;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO django_proj;
 ```
 
 `Step 7` : Create Migrate.
@@ -282,120 +282,91 @@ pip install djangorestframework
 
 ```
 pip install fontawesomefree
-``
+```
 
 `Step 3` : Install requiremental Packages.
 
 ```
-
 pip freeze > wrequirements.txt
 
 ```
 
 ```
-
 pip install -r wrequirements.txt
-
 ```
 
 `Step 4` : Create Project.
 
 ```
+django-admin startproject crowdfunding
+```
 
-m
-
+```
+cd crowdfunding
 ```
 
 `Step 5` : Create Apps.
 
 ```
-
 python manage.py startapp account
-
 ```
 
 ```
-
 python manage.py startapp home
-
 ```
 
 `Step 6` : Create Database.
 
 ```
-
 su - postgres
-
 ```
 
 ```
-
 psql
-
 ```
 
 ```
-
-CREATE USER django WITH PASSWORD 'mazen@@1';
-
+CREATE USER django_proj WITH PASSWORD 'django@@1';
 ```
 
 ```
-
 create database crowd_funding;
-
 ```
 
 ```
-
-GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django;
-
+GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django_proj;
 ```
 
 ```
-
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django;
-
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO django_proj;
 ```
 
 ```
-
-GRANT ALL PRIVILEGES ON SCHEMA public TO django;
-
+GRANT ALL PRIVILEGES ON SCHEMA public TO django_proj;
 ```
 
 ```
-
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO django;
-
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO django_proj;
 ```
 
 `Step 7` : Create Migrate.
 
 ```
-
 python manage.py makemigrations
-
 ```
 
 ```
-
 python manage.py migrate
-
 ```
 
 ```
-
 python manage.py createsuperuser
-
 ```
 
 `Step 8` : Run Server.
 
 ```
-
 python manage.py runserver
-
 ```
 
 ---
