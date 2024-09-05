@@ -173,6 +173,10 @@ cd crowdfunding
 `Step 5` : Create Apps.
 
 ```
+python3 manage.py startapp project
+```
+
+```
 python3 manage.py startapp account
 ```
 
