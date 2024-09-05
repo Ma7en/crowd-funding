@@ -146,6 +146,10 @@ pip install djangorestframework
 pip install fontawesomefree
 ```
 
+```
+pip install django-jquery
+```
+
 `Step 3` : Install requiremental Packages.
 
 ```
