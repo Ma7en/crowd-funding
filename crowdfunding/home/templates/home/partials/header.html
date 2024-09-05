@@ -39,8 +39,10 @@
             <ul class="navbar-nav">
                 {% if user.id %}
                 <li class="nav-item d-flex align-items-center">
-                    Welcome,
-                    <a class="nav-link" href="/accounts/profile/">
+                    Welcome,<a
+                        class="nav-link"
+                        href="{% url 'profile' pk=user.id %}"
+                    >
                         {% if user.first_name %}
                         <!--  -->
                         {{user.first_name}}
