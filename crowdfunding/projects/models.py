@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from account.models import User
 
 
 # Create your models here.
@@ -20,11 +20,9 @@ class Project(models.Model):
     end_time = models.DateTimeField(default=timezone.now)
     rate = models.IntegerField(default=0)
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, related_name="project-category"
+        Category, on_delete=models.CASCADE, related_name="category"
     )
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="project-user"
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -34,9 +32,9 @@ class Project(models.Model):
 class Donation(models.Model):
     donation = models.FloatField()
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="donation-project"
+        Project, on_delete=models.CASCADE, related_name="donation_project"
     )
     user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="donation-user"
+        User, on_delete=models.CASCADE, related_name="donation_user"
     )
     created_at = models.DateTimeField(auto_now_add=True)
