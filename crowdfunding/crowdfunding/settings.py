@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # apps
     "account.apps.AccountConfig",
     "home.apps.HomeConfig",
+    "projects.apps.ProjectsConfig",
+    "Feedback.apps.FeedbackConfig",
     # packages
     "fontawesomefree",
     "django_cleanup",

@@ -207,6 +207,10 @@ create database crowd_funding;
 ```
 
 ```
+\c crowd_funding;
+```
+
+```
 GRANT ALL PRIVILEGES ON DATABASE crowd_funding TO django_proj;
 ```
 
