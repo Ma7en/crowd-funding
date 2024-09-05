@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     # apps
     "account.apps.AccountConfig",
     "home.apps.HomeConfig",
+    # packages
+    "fontawesomefree",
 ]
 
 # packages

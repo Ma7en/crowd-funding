@@ -1,8 +1,9 @@
 from django.urls import path, include
-from .views import CreateAccount, EditAccount, ShowProfile, Logout, DeleteAccount
+from .views import CreateAccount, EditAccount, ShowProfile, Logout, DeleteAccount, Login
 
 
 urlpatterns = [
+    path("login/", Login.as_view(), name="login"),
     path("signup/", CreateAccount.as_view(), name="signup"),
     path("accounts/profile/", ShowProfile, name="profile"),
     path("editprofile/<int:pk>", EditAccount.as_view(), name="editprofile"),
