@@ -15,7 +15,7 @@ def project_detail(request, id):
     return render(request, "projects/project_detail.html", {"project": project})
 
 
-def add_project(request):
+def create_project(request):
     if request.method == "POST":
         form = ProjectForm(request.POST)
         if form.is_valid():
@@ -23,8 +23,7 @@ def add_project(request):
             return redirect("project_list")
     else:
         form = ProjectForm()
-    return render(request, "add_project.html", {"form": form})
-
+    return render(request, 'projects/create.html', {'form': form})
 
 def edit_project(request, project_id):
     project = get_object_or_404(Project, id=project_id)
