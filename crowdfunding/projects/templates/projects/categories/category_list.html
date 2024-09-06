@@ -1,9 +1,12 @@
 {% extends "home/base.html" %}
-
+<!-- title -->
 {% block title %} Show Category {% endblock title %}
 
+<!-- content -->
 {% block content %}
+<!--  -->
 {% for catg in categories %}
-    <h2>{{catg.name }}</h2>
+<h2>{{catg.name }}</h2>
 {% endfor %}
+<!--  -->
 {% endblock %}

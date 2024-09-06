@@ -38,7 +38,7 @@ class Donation(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="donation_user"
     )
-    created_at = models.DateTimeField(timezone.now())
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return str(self.amount)
