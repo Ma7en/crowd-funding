@@ -1,13 +1,13 @@
 from datetime import datetime
 from typing import Any
 from django import forms
-from .models import Project
-
+from . models import Project , Category
 
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         fields = "__all__"
+
 
 def clean(self):
         cleaned_data = super().clean()
@@ -22,3 +22,10 @@ def clean(self):
             if end_date <= start_date:
                 msg = "End date should be greater than start date."
                 self._errors["end_time"] = self.error_class([msg])
+
+
+class CategoryForm(forms.ModelForm):
+
+    class Meta:
+        model = Category
+        fields = '__all__'
