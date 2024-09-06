@@ -10,41 +10,41 @@
     >
         <h4>Sign up with:</h4>
         <div class="brands d-flex justify-content-around w-50 mx-auto">
-            <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fa-brands fa-facebook"></i>
-            </button>
+            <a type="button" class="btn btn-link btn-floating mx-1">
+                <i
+                    class="fa-brands fa-facebook"
+                    href="{% url 'social:begin' 'facebook' %}"
+                ></i>
+            </a>
 
-            <button type="button" class="btn btn-link btn-floating mx-1">
-                <i class="fa-brands fa-twitter"></i>
-            </button>
-
-            <button type="button" class="btn btn-link btn-floating mx-1">
+            <a
+                type="button"
+                class="btn btn-link btn-floating mx-1"
+                href="{% url 'social:begin' 'google-oauth2' %}"
+            >
                 <i class="fa-brands fa-google"></i>
-            </button>
+            </a>
 
-            <button type="button" class="btn btn-link btn-floating mx-1">
+            <a
+                type="button"
+                class="btn btn-link btn-floating mx-1"
+                href="{% url 'social:begin' 'github' %}"
+            >
                 <i class="fa-brands fa-github"></i>
-            </button>
+            </a>
         </div>
         <hr />
-        {% csrf_token %}
-
-        <!--  -->
-        {% if form.non_field_errors %}
+        {% csrf_token %} {% if form.non_field_errors %}
         <div class="alert alert-danger p-3 mb-2" role="alert">
             {{ form.non_field_errors }}
         </div>
-        {%endif%}
-
-        <!--  -->
-        {% for field in form %}
+        {%endif%} {% for field in form %}
         <div class="mb-3">
             {{ field.label_tag }}
             <!--  -->
             {{ field }}
             <!--  -->
             {{ field.errors }}
-
             <!--  -->
             {% if field.help_text %}
             <div class="alert alert-warning pb-1 pt-2 mb-2" role="alert">
