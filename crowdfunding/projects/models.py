@@ -5,6 +5,7 @@ from account.models import User
 
 # Create your models here.
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -19,8 +20,10 @@ class Project(models.Model):
     start_time = models.DateTimeField(default=timezone.now)
     end_time = models.DateTimeField(default=timezone.now)
     # rate = models.IntegerField(default=0)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owner')
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, related_name="category"
+    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="owner")
     created_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -29,8 +32,12 @@ class Project(models.Model):
 
 class Donation(models.Model):
     amount = models.FloatField()
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='donation_project')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='donation_user')
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="donation_project"
+    )
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="donation_user"
+    )
     created_at = models.DateTimeField(timezone.now())
 
     def __str__(self):
