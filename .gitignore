@@ -3,6 +3,8 @@
 __pycache__/
 migrations/
 migrations
+notes
+notes/
 
 # Distribution / packaging
 .dist/
