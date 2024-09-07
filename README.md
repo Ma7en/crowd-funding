@@ -154,6 +154,26 @@ pip install django-jquery
 pip install django-cleanup
 ```
 
+```
+pip install django-utils-six
+```
+
+```
+pip install social-auth-app-django
+```
+
+```
+pip install django-allauth
+```
+
+```
+pip install python-dotenv
+```
+
+```
+pip install django-countries
+```
+
 `Step 3` : Install requiremental Packages.
 
 ```
@@ -181,7 +201,7 @@ python3 manage.py startapp account
 ```
 
 ```
-python3 manage.py startapp project
+python3 manage.py startapp projects
 ```
 
 ```
@@ -308,6 +328,26 @@ pip install django-jquery
 pip install django-cleanup
 ```
 
+```
+pip install django-utils-six
+```
+
+```
+pip install social-auth-app-django
+```
+
+```
+pip install django-allauth
+```
+
+```
+pip install python-dotenv
+```
+
+```
+pip install django-countries
+```
+
 `Step 3` : Install requiremental Packages.
 
 ```
@@ -332,19 +372,19 @@ cd crowdfunding
 `Step 5` : Create Apps.
 
 ```
-python3 manage.py startapp account
+python manage.py startapp account
 ```
 
 ```
-python3 manage.py startapp project
+python manage.py startapp projects
 ```
 
 ```
-python3 manage.py startapp home
+python manage.py startapp home
 ```
 
 ```
-python3 manage.py startapp Feedback
+python manage.py startapp Feedback
 ```
 
 `Step 6` : Create Database.
