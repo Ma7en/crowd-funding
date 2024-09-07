@@ -90,8 +90,10 @@ class LoginForm(AuthenticationForm):
 
 class FullUserForm(UserChangeForm):
     password = None
-    email = forms.EmailField(disabled=True)
-    birthdate = forms.DateTimeField(widget=NumberInput(attrs={"type": "date"}))
+    email = forms.EmailField(disabled=True, required=False)
+    birthdate = forms.DateTimeField(
+        widget=NumberInput(attrs={"type": "date"}), required=False
+    )
 
     class Meta:
         model = User
@@ -109,3 +111,26 @@ class FullUserForm(UserChangeForm):
 
     def clean_email(self):
         return self.instance.email
+
+    def clean_phone(self):
+        phone = self.cleaned_data.get("phone")
+        re.compile("^01[0125]{1}[0-9]{8}$")
+        if phone and not re.fullmatch("^01[0125]{1}[0-9]{8}$", phone):
+            self._update_errors(
+                ValidationError({"phone": "Phone must match Egyptian format"})
+            )
+
+        return phone
+
+    def clean_picture(self):
+        picture = self.cleaned_data.get("picture")
+        if picture:
+            w, h = get_image_dimensions(picture)
+            if w > 800 or h > 800:
+                self._update_errors(
+                    ValidationError(
+                        {"picture": "Picture Dimensions must be 800*800 or less"}
+                    )
+                )
+
+        return picture
