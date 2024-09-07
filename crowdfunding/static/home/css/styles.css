@@ -7,7 +7,7 @@
 html {
     /* background-color: antiquewhite; */
     background-color: #fdfdfdd6;
-    background: url('../images/download.png');
+    background: url("../images/download.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -29,7 +29,7 @@ ul.errorlist {
     list-style-type: none;
     margin: 0;
     padding: 0;
-  }
+}
 
 div.brands i {
     font-size: 30px;
@@ -37,6 +37,4 @@ div.brands i {
 
 button.btn.search:hover {
     background-color: rgb(145, 39, 39);
-
-
 }

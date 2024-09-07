@@ -9,13 +9,14 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         # fields = '__all__'
-        exclude = ['user']
+        exclude = ["user"]
 
 
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = "__all__"
+
 
 # class ProjectForm(forms.ModelForm):
 #     class Meta:
