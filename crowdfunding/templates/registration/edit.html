@@ -9,7 +9,6 @@
         enctype="multipart/form-data"
     >
         <h2>Edit your profile information</h2>
-
         <hr />
         {% csrf_token %} {% if form.non_field_errors %}
         <div class="alert alert-danger p-3 mb-2" role="alert">
@@ -17,11 +16,8 @@
         </div>
         {% endif %} {% for field in form %}
         <div class="mb-3">
-            {{ field.label_tag }} {{ field }} {{ field.errors }} {% if
-            field.help_text %}
-            <div class="alert alert-warning pb-1 pt-2 mb-2" role="alert">
-                {{ field.help_text }}
-            </div>
+            {{ field.label_tag }} {{ field }} {% if field.errors %}
+            <div class="text-danger">{{ field.errors }}</div>
             {% endif %}
         </div>
         {% endfor %}

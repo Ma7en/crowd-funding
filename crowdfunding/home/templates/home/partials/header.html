@@ -1,10 +1,10 @@
 <nav
     class="navbar navbar-expand-lg bg-body-tertiary"
     style="
-        background-color: rgb(0 0 0);
+        background-color: rgb(108, 108, 108);
         border-radius: 4.5rem;
         margin: 2rem;
-        height: 8rem;
+        height: 4rem;
         font-weight: bold;
         box-shadow: 0 0 10px;
         font-size: 1.2rem;
@@ -22,7 +22,9 @@
                     >
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Categories</a>
+                    <a class="nav-link active" aria-current="page" href="#"
+                        >Categories</a
+                    >
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">About us</a>
@@ -57,48 +59,45 @@
 
             <ul class="navbar-nav">
                 {% if user.id %}
-                <li class="nav-item d-flex align-items-center">
-                    Welcome,
+                <div class="btn-group">
                     <a
-                        class="nav-link"
-                        style="
-                            color: white;
-                            background-color: #0dcaf06b;
-                            border-radius: 1rem;
-                            width: 5.5rem;
-                            opacity: 90%;
-                        "
+                        type="button"
+                        class="btn btn-info"
                         href="{% url 'profile' pk=user.id %}"
                     >
-                        {% if user.first_name %} {{user.first_name}} {%else%}
-                        {{user}} {%endif%}
+                        <img
+                            src="{{user.get_profile_picture}}"
+                            onerror="this.onerror=null;this.src='/media/account/images/annon.png';"
+                            alt="Avatar"
+                            class="img-fluid rounded-circle me-2"
+                            style="width: 30px"
+                        />
+                        {% if user.first_name %}{{user.first_name}}{% else
+                        %}{{user}}{% endif %}
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a
-                        class="nav-link m-0"
-                        style="
-                            background-color: #e2d6d6;
-                            border-radius: 1rem;
-                            color: maroon;
-                        "
-                        href="{% url 'logout' %}"
-                        >Logout</a
-                    >
-                </li>
-                <li class="nav-item dropdown me-1">
-                    <i
-                        class="fa-solid fa-gear dropdown-toggle nav-item"
-                        style="
-                            padding-left: 1rem;
-                            padding-top: 14px;
-                            cursor: pointer;
-                            color: white;
-                        "
+                    <button
+                        type="button"
+                        class="btn btn-info dropdown-toggle dropdown-toggle-split"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
-                    ></i>
+                    >
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
                     <ul class="dropdown-menu">
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="{% url 'userprojects' %}"
+                                >Your Projects</a
+                            >
+                        </li>
+                        <li>
+                            <a
+                                class="dropdown-item"
+                                href="{% url 'userdonations' %}"
+                                >Your Donations</a
+                            >
+                        </li>
                         <li>
                             <a
                                 class="dropdown-item"
@@ -106,8 +105,14 @@
                                 >Edit Profile</a
                             >
                         </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li>
+                            <a class="dropdown-item" href="{% url 'logout' %}"
+                                >Logout</a
+                            >
+                        </li>
                     </ul>
-                </li>
+                </div>
                 {% else %}
                 <li class="nav-item">
                     <a class="nav-link m-0" href="{% url 'login' %}">Login</a>

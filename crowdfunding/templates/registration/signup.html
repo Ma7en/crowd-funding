@@ -10,13 +10,6 @@
     >
         <h4>Sign up with:</h4>
         <div class="brands d-flex justify-content-around w-50 mx-auto">
-            <a type="button" class="btn btn-link btn-floating mx-1">
-                <i
-                    class="fa-brands fa-facebook"
-                    href="{% url 'social:begin' 'facebook' %}"
-                ></i>
-            </a>
-
             <a
                 type="button"
                 class="btn btn-link btn-floating mx-1"
@@ -40,13 +33,8 @@
         </div>
         {%endif%} {% for field in form %}
         <div class="mb-3">
-            {{ field.label_tag }}
-            <!--  -->
-            {{ field }}
-            <!--  -->
-            {{ field.errors }}
-            <!--  -->
-            {% if field.help_text %}
+            {{ field.label_tag }} {{ field }} {{ field.errors }} {% if
+            field.help_text %}
             <div class="alert alert-warning pb-1 pt-2 mb-2" role="alert">
                 {{ field.help_text }}
             </div>
