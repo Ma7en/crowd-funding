@@ -158,7 +158,6 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 SOCIAL_AUTH_FACEBOOK_KEY = "3738217359745570"
 SOCIAL_AUTH_FACEBOOK_SECRET = "7fdf8462e923299f9b618e46656fd6b9"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
