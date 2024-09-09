@@ -1,6 +1,6 @@
 {% extends 'home/base.html' %} {% load static %}
 
-<!-- content -->
+<!-- cotnent -->
 {% block content %}
 
 <section style="background-color: #f4f5f7">
@@ -57,8 +57,8 @@
                 <!-- Information Section -->
                 <div class="col-12 col-md-8">
                     <div class="accordion card-body p-4">
-                        <!-- Personal Info -->
                         <div class="accordion" id="accordionExample">
+                            <!-- Personal Info -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
                                     <button
@@ -137,94 +137,39 @@
                                     aria-labelledby="headingTwo"
                                 >
                                     <div class="accordion-body">
+                                        {% if profileuser.projects %}
                                         <div
                                             class="list-group list-group-horizontal position-relative overflow-auto"
+                                            style="height: 55vh"
                                         >
-                                            <div class="list-group-item">
+                                            {%for project in
+                                            profileuser.projects.all%}
+                                            <div
+                                                class="list-group-item border-0"
+                                            >
                                                 <div
-                                                    class="card"
+                                                    class="card position-relative h-100"
                                                     style="width: 18rem"
                                                 >
-                                                    <img
-                                                        src="..."
-                                                        class="card-img-top"
-                                                        alt="..."
-                                                    />
-                                                    <div class="card-body">
-                                                        <p class="card-text">
-                                                            Some quick example
-                                                            text to build on the
-                                                            card title and make
-                                                            up the bulk of the
-                                                            card's content.
-                                                        </p>
-                                                    </div>
+                                                    {% include
+                                                    "projects/partials/projectinfo.html"
+                                                    with project=project %}
                                                 </div>
                                             </div>
-                                            <div class="list-group-item">
-                                                <div
-                                                    class="card"
-                                                    style="width: 18rem"
-                                                >
-                                                    <img
-                                                        src="..."
-                                                        class="card-img-top"
-                                                        alt="..."
-                                                    />
-                                                    <div class="card-body">
-                                                        <p class="card-text">
-                                                            Some quick example
-                                                            text to build on the
-                                                            card title and make
-                                                            up the bulk of the
-                                                            card's content.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="list-group-item">
-                                                <div
-                                                    class="card"
-                                                    style="width: 18rem"
-                                                >
-                                                    <img
-                                                        src="..."
-                                                        class="card-img-top"
-                                                        alt="..."
-                                                    />
-                                                    <div class="card-body">
-                                                        <p class="card-text">
-                                                            Some quick example
-                                                            text to build on the
-                                                            card title and make
-                                                            up the bulk of the
-                                                            card's content.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="list-group-item">
-                                                <div
-                                                    class="card"
-                                                    style="width: 18rem"
-                                                >
-                                                    <img
-                                                        src="..."
-                                                        class="card-img-top"
-                                                        alt="..."
-                                                    />
-                                                    <div class="card-body">
-                                                        <p class="card-text">
-                                                            Some quick example
-                                                            text to build on the
-                                                            card title and make
-                                                            up the bulk of the
-                                                            card's content.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {%endfor%}
                                         </div>
+                                        {%else%}
+                                        <h4
+                                            class="d-flex m-0 align-items-center justify-content-center"
+                                        >
+                                            You have no projects!<a
+                                                class="m-0 ms-5 btn btn-primary"
+                                                href="{% url 'project_create' %}"
+                                                style="margin-bottom: 10px"
+                                                >Create One Now!</a
+                                            >
+                                        </h4>
+                                        {%endif%}
                                     </div>
                                 </div>
                             </div>
@@ -249,20 +194,17 @@
                                     aria-labelledby="headingThree"
                                 >
                                     <div class="accordion-body">
-                                        <div class="row pt-1">
-                                            <div class="col-6 mb-3">
-                                                <h6>Recent</h6>
-                                                <p class="text-muted">
-                                                    Lorem ipsum
-                                                </p>
-                                            </div>
-                                            <div class="col-6 mb-3">
-                                                <h6>Most Viewed</h6>
-                                                <p class="text-muted">
-                                                    Dolor sit amet
-                                                </p>
-                                            </div>
-                                        </div>
+                                        {%if user.donations.all %} {%for
+                                        donation in user.donations.all%} {%
+                                        include
+                                        "projects/partials/donationcard.html"
+                                        with donation=donation %} {%endfor%}
+                                        {%else%}
+                                        <h3>
+                                            This user has currently no
+                                            donations!
+                                        </h3>
+                                        {%endif%}
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +228,16 @@
                                     class="accordion-collapse collapse"
                                     aria-labelledby="headingFour"
                                 >
-                                    <div class="accordion-body">Text Here</div>
+                                    <div class="accordion-body">
+                                        {%if user.reviews.all %} {%for review in
+                                        user.reviews.all%} {% include
+                                        "projects/partials/reviewcard.html" with
+                                        review=review %} {%endfor%} {%else%}
+                                        <h3>
+                                            This user has currently no reviews!
+                                        </h3>
+                                        {%endif%}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -296,4 +247,5 @@
         </div>
     </div>
 </section>
+
 {% endblock %}

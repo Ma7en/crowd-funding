@@ -46,6 +46,7 @@ class CreateUserForm(UserCreationForm):
 
     def clean_picture(self):
         picture = self.cleaned_data.get("picture")
+        print(picture.__dict__)
         if picture:
             w, h = get_image_dimensions(picture)
             if w > 800 or h > 800:
