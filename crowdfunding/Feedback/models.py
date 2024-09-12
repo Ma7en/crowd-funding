@@ -3,9 +3,8 @@ from projects.models import Project
 from account.models import User
 
 
-# Create your models here.
 class Comment(models.Model):
-    cotent = models.CharField(max_length=500)
+    content = models.CharField(max_length=500)
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="comments"
     )
@@ -29,5 +28,17 @@ class Report(models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="reports"
     )
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name="reports"
+    )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reports")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Reply(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="replies")
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name="replies"
+    )
+    content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)

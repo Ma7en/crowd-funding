@@ -1,9 +1,10 @@
 from datetime import datetime
 from typing import Any
 from django import forms
-from .models import Project
+from .models import Project, Photo
 from django.forms import ClearableFileInput, FileField
 from django.core.validators import validate_image_file_extension
+from django.core.exceptions import ValidationError
 
 
 class MultipleFileInput(ClearableFileInput):
@@ -34,6 +35,7 @@ class ProjectForm(forms.ModelForm):
         ("Education", "Education"),
         ("Political", "Political"),
     )
+
     category = forms.ChoiceField(choices=categories)
     start_time = forms.DateTimeField(
         initial=datetime.now().date(),
@@ -63,17 +65,33 @@ class ProjectForm(forms.ModelForm):
             "details": forms.Textarea(attrs={"rows": "5"}),
         }
 
-    def clean_tags(self):
-        return self.cleaned_data.get("tags").split(",")
-
     def clean(self):
-        start_date = self.cleaned_data.get("start_time")
-        end_date = self.cleaned_data.get("end_time")
+        start_time = self.cleaned_data.get("start_time")
+        end_time = self.cleaned_data.get("end_time")
 
-        if datetime.now().date() > start_date.date():
-            msg = "Start date shouldn't be less than today."
-            self._errors["start_time"] = self.error_class([msg])
+        if datetime.now().date() > start_time.date():
+            if not (self.instance.id and self.instance.start_time == start_time.date()):
+                msg = "Start date shouldn't be less than today."
+                self._errors["start_time"] = self.error_class([msg])
 
-        if end_date <= start_date:
+        if end_time <= start_time:
             msg = "End date should be greater than start date."
             self._errors["end_time"] = self.error_class([msg])
+
+    def clean_title(self):
+        title = self.cleaned_data.get("title")
+        if Project.objects.filter(title__icontains=title).exists():
+            if not (self.instance.id and self.instance.title == title):
+                self._update_errors(
+                    ValidationError(
+                        {"title": "A project with this title already exists"}
+                    )
+                )
+
+        return title
+
+
+class ProjectFileForm(ProjectForm):
+    file = MultipleFileField(
+        widget=MultipleFileInput(attrs={"multiple": True}), required=False
+    )
