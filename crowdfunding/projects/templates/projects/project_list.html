@@ -1,34 +1,38 @@
-{% extends "home/base.html" %}
+{% extends "home/base.html" %} {% block content %}
+<br />
 
-{% block content %}
-<br>
+<div class="container mt-2 mb-5">
+    {% if category %}
+    <h2>Your are viewing all projects in {{category}} Category</h2>
+    {% elif tag %}
+    <h2>Your are viewing all projects with {{tag}} Tag</h2>
+    {% elif search %}
+    <h2>Search results for: {{search}}</h2>
+    {% else %} {% if user.id %}
+    <div class="d-flex justify-content-center">
+        <a
+            class="btn btn-primary w-50 mx-auto"
+            href="{% url 'project_create' %}"
+            style="margin-bottom: 10px"
+            >Add Project</a
+        >
+    </div>
+    {%endif%}
+    <h2>Explore all current projects</h2>
+    {%endif%}
 
-    <div class="container mt-2 mb-5">
-        {% if category %}
-            <h2>Your are viewing all projects in {{category}} Category</h2>
-        {% elif tag %}
-            <h2>Your are viewing all projects with {{tag}} Tag</h2>
-        {% elif search %}
-            <h2>Search results for: {{search}}</h2>
-        {% else %}
-            {% if user.id %}
-            <div class="d-flex justify-content-center">
-                <a class="btn btn-primary w-50 mx-auto" href="{% url 'project_create' %}" style="margin-bottom: 10px;">Add Project</a>
-            </div>
-            {%endif%}
-            <h2>Explore all current projects</h2>
-        {%endif%}
-
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 my-2 overflow-hidden">
+    <div
+        class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 my-2 overflow-hidden"
+    >
         {% for project in projects %}
         <div class="col">
-            <h1>{{project.id}}</h1>
-            <div class="card position-relative mx-1" style="height: 60vh;">
-                {% include "projects/partials/projectinfo.html" with project=project inlist=1 %}
+            <div class="card position-relative mx-1" style="height: 60vh">
+                {% include "projects/partials/projectinfo.html" with
+                project=project inlist=1 %}
             </div>
         </div>
 
         {% endfor %}
-        </div>
     </div>
+</div>
 {% endblock %}
