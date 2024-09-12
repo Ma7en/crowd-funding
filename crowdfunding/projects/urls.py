@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
-from projects.views import project_detail, project_list, CreateProject,EditProjectView,delete, CategoryView, TagView , donate,similar
+from projects.views import project_detail, project_list, CreateProject,EditProjectView,delete, CategoryView, TagView , donate
 
 
 urlpatterns = [
