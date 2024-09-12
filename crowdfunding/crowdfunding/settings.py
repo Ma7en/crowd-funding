@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     # packages
     "fontawesomefree",
     "django_cleanup",
+    "jquery",
 ]
 
 # packages

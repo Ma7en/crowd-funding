@@ -2,22 +2,12 @@
 
 <div class="container my-2 p-3 rounded">
     <div class="row gx-3 bg-light my-3" style="box-shadow: 0 0 5px">
-        <div class="col-12 col-lg-8 my-auto">
-            {% comment %}
-            <div class="card">
-                <img
-                    src="{{project.thumbnail}}"
-                    class="card-img"
-                    alt="thumbnail"
-                    style="object-fit: cover"
-                />
-            </div>
-            {% endcomment %}
+        <div class="col-12 col-lg-8 my-auto p-2 rounded">
+            {% if project.all_photos|length > 1 %}
             <div
                 id="carouselExampleIndicators"
                 class="carousel slide"
                 data-bs-ride="carousel"
-                style="width: 500px; height: 300px"
             >
                 <ol class="carousel-indicators">
                     {% for photo in project.all_photos %}
@@ -43,11 +33,7 @@
                             src="{{ photo }}"
                             class="d-block w-100"
                             alt="project photo"
-                            style="
-                                width: 500px;
-                                height: 300px;
-                                object-fit: cover;
-                            "
+                            style="object-fit: cover"
                         />
                     </div>
                     {% endfor %}
@@ -77,6 +63,16 @@
                     <span class="visually-hidden">Next</span>
                 </a>
             </div>
+            {% else %}
+            <div class="card">
+                <img
+                    src="{{project.thumbnail}}"
+                    class="card-img"
+                    alt="thumbnail"
+                    style="object-fit: cover"
+                />
+            </div>
+            {%endif%}
         </div>
         <div class="col-12 col-lg-4 p-3 position-relative">
             {%if user == project.user %}
@@ -91,7 +87,7 @@
                 ></a>
                 <a
                     class="btn btn-outline-danger"
-                    href="{% url 'project_delete' id=project.id %}"
+                    href="{% url 'project_delete' pk=project.id %}"
                     ><i class="fa-solid fa-x"></i
                 ></a>
             </div>
@@ -114,22 +110,12 @@
                 <p>{{ project.details}}</p>
             </div>
 
-            <div class="card-text progress" style="height: 25px">
-                <div
-                    class="progress-bar progress-bar-striped progress-bar-animated fs-6"
-                    role="progressbar"
-                    aria-valuenow="{{project.raised_money}}"
-                    aria-valuemin="0"
-                    style="width:{{project.percentage}}%"
-                    aria-valuemax="{{project.total_target}}"
-                >
-                    {%if project.percentage > 25%}Raised
-                    ${{project.raised_money}}{%endif%}
-                </div>
-            </div>
+            {% include "projects/partials/progressbar.html" with project=project
+            %}
+
             <div class="card-text d-flex justify-content-around my-5">
                 <a
-                    href="{% url 'donate' id=project.id %}"
+                    href="{% url 'donate' pk=project.id %}"
                     class="btn btn-success fs-4"
                     >Donate Now</a
                 >
@@ -142,7 +128,8 @@
                     <tr>
                         <td>Tags:</td>
                         <td align="center">
-                            {% for tag in project.tags_array %}
+                            {% comment %} {% for tag in project.tags_array %} {%
+                            endcomment %} {% for tag in project.tags %}
                             <a
                                 class="badge bg-info text-dark text-decoration-none"
                                 href="{% url 'tag' tag=tag%}"
@@ -151,7 +138,14 @@
                             {%endfor%}
                         </td>
                     </tr>
-                    {%endif%}
+                    {%endif%} {% comment %} {% for tag in project.tags_array %}
+                    {% if tag %}
+                    <a
+                        class="badge bg-info text-dark text-decoration-none"
+                        href="{% url 'tag' tag=tag %}"
+                        >{{ tag }}</a
+                    >
+                    {% endif %} {% endfor %} {% endcomment %}
                     <tr>
                         <td>Category:</td>
                         <td align="center">
@@ -165,15 +159,12 @@
                     <tr>
                         <td>Reviews</td>
                         <td align="center">
-                            <div class="rate">
-                                {% for i in project.rates %} {% if i == 0.5 %}
-                                <i class="fa-solid fa-star-half-stroke"></i>
-                                {%elif i == 0%}
-                                <i class="fa-regular fa-star"></i>
-                                {%else%}
-                                <i class="fa-solid fa-star"></i>
-                                {%endif%} {%endfor%}
-                            </div>
+                            <span
+                                class="text-muted position-absolute"
+                                style="right: 30px"
+                                >({{project.reviews.all|length}})</span
+                            >{% include "projects/partials/starrating.html" with
+                            rates=project.rates %}
                         </td>
                     </tr>
                     {% if user != project.user %}
@@ -181,7 +172,7 @@
                         <td colspan="2" align="center">
                             <a
                                 class="btn btn-outline-danger mt-3 w-50"
-                                href="{% url 'report' id=project.id %}"
+                                href="{% url 'report' pk=project.id %}?type=project"
                                 >Report</a
                             >
                         </td>
@@ -195,14 +186,14 @@
         <div class="col-12 col-lg-6 p-2">
             <div class="bg-light rounded p-3" style="box-shadow: 0 0 5px">
                 <a
-                    href="{% url 'create_comment' id=project.id %}"
+                    href="{% url 'create_comment' pk=project.id %}"
                     class="btn btn-outline-info float-end"
                     >Add Comment</a
                 >
                 <h2>Comments</h2>
                 <div class="comments">
                     <hr />
-                    {%if project.comments.all %} {%for review in
+                    {%if project.comments.all %} {%for comment in
                     project.comments.all%} {% include
                     "projects/partials/commentcard.html" with comment=comment %}
                     {%endfor%} {%else%}
@@ -214,7 +205,7 @@
         <div class="col-12 col-lg-6 p-2">
             <div class="bg-light rounded p-3" style="box-shadow: 0 0 5px">
                 <a
-                    href="{% url 'create_review' id=project.id %}"
+                    href="{% url 'create_review' pk=project.id %}"
                     class="float-end btn btn-outline-info"
                     >Add Review</a
                 >

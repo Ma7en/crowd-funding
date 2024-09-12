@@ -1,157 +1,73 @@
-{% extends "home/base.html" %}
+<a
+    class="position-absolute m-2 badge bg-warning text-dark text-decoration-none"
+    href="{%url 'category' category=project.category%}"
+    >{{project.category}}</a
+>
+<a href="{% url 'project_detail' pk=project.id %}" class="h-50"
+    ><img
+        src="{{project.thumbnail}}"
+        class="card-img-top img-fluid h-100"
+        alt="thumbnail"
+/></a>
+<div class="card-body p-4">
+    <h3 style="text-overflow: ellipsis" class="text-nowrap overflow-hidden">
+        <a
+            class="text-dark text-decoration-none"
+            href="{% url 'project_detail' pk=project.id %}"
+            >{{project.title}}</a
+        >
+    </h3>
+    <p
+        class="card-text text-nowrap overflow-hidden"
+        style="text-overflow: ellipsis"
+    >
+        {{project.details}}
+    </p>
 
-{% block content %}
+    {% include "projects/partials/progressbar.html" with project=project %}
 
-<div class="container my-2  p-3 rounded">
-    <div class="row gx-3 bg-light my-3"  style="box-shadow: 0 0 5px;">
-        <div class="col-12 col-lg-8 my-auto">
-            {% comment %} <div class="card">
-                <img src="{{project.thumbnail}}" class="card-img" alt="thumbnail" style="object-fit: cover;">
-            </div>  {% endcomment %}
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="width: 500px; height: 300px;">
-                <ol class="carousel-indicators">
-                    {% for photo in project.all_photos %}
-                    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
-                    {% endfor %}
-                </ol>
-                <div class="carousel-inner">
-                    {% for photo in project.all_photos %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ photo }}" class="d-block w-100" alt="project photo" style="width: 500px; height: 300px; object-fit: cover;">
-                    </div>
-                    {% endfor %}
-                </div> 
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
-            </div> 
-            
+    <div class="mt-2 row w-100">
+        <div class="col-6">
+            {%if project.expired %}
+            <span class="badge bg-warning text-light">Expired</span>
+            {% else %}
+            <span class="badge bg-success text-light">Active</span>
+            {%endif%} {%if project.tags%} {% for tag in project.tags_array %}
+            <a
+                class="badge bg-info text-dark text-decoration-none"
+                href="{% url 'tag' tag=tag%}"
+                >{{ tag }}</a
+            >
+            {%endfor%} {%endif%}
+            <p class="text-muted">{{project.created_at.date}}</p>
         </div>
-        <div class="col-12 col-lg-4 p-3 position-relative">
-            {%if user == project.user %}
-            <div class="control position-absolute" style="right: 20px; top: 65px;">
-                <a class="btn btn-outline-dark" href="{% url 'edit_project' pk=project.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a class="btn btn-outline-danger" href="{% url 'project_delete' id=project.id %}"><i class="fa-solid fa-x"></i></a>    
-            </div>
-            {%endif%}
-            <h1 class="card-title fw-bold">{{project.title}}</h1>
-            <div class="card-text ps-3">
-                {%if project.expired %}
-                    <span class="badge bg-warning text-light">Expired</span>
-                {% else %}
-                    <span class="badge bg-success text-light fs-6">Active</span>
-                    <p class="ms-3 d-inline"><i class="fa-regular fa-clock me-2"></i>{{project.remaining_time}} days left!</p>
-                {%endif%}                
-            </div>
-            <hr>
-            <div class="card-text">
-                <h3>Description: </h3>
-                <p>{{ project.details}}</p>
-            </div>
-
-            <div class="card-text progress" style="height: 25px;">
-                <div class="progress-bar progress-bar-striped progress-bar-animated fs-6" role="progressbar"
-                    aria-valuenow="{{project.raised_money}}" aria-valuemin="0" style="width:{{project.percentage}}%"
-                    aria-valuemax="{{project.total_target}}">{%if project.percentage > 25%}Raised
-                    ${{project.raised_money}}{%endif%}</div>
-            </div>
-            <div class="card-text d-flex justify-content-around my-5">
-                <a href="{% url 'donate' id=project.id %}" class="btn btn-success fs-4">Donate Now</a>
-            </div>
-
-            <hr>
-            <div class="card-text">
-                <table class="table table-borderless">
-                    {%if project.tags%}
-                    <tr>
-                        <td>Tags:</td>
-                        <td  align="center">
-                            {% comment %} {% for tag in project.tags_array %} {% endcomment %}
-                            {% for tag in project.tags %}
-                                <a class="badge bg-info text-dark text-decoration-none" href="{% url 'tag' tag=tag%}">{{ tag }}</a>
-                            {%endfor%}
-                        </td>
-                    </tr>
-                    {%endif%}
-                    {% comment %} {% for tag in project.tags_array %}
-                      {% if tag %}
-                        <a class="badge bg-info text-dark text-decoration-none" href="{% url 'tag' tag=tag %}">{{ tag }}</a>
-                    {% endif %}
-                    {% endfor %} {% endcomment %}
-                    <tr>
-                        <td>Category:</td>
-                        <td  align="center"> 
-                            <a class="badge bg-warning text-dark text-decoration-none" 
-                            href="{%url 'category' category=project.category%}">{{project.category}}</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Reviews</td>
-                        <td align="center">
-                            <div class="rate">
-                            {% for i in project.rates %}
-                                {% if i == 0.5 %}
-                                    <i class="fa-solid fa-star-half-stroke"></i>
-                                {%elif i  == 0%}
-                                    <i class="fa-regular fa-star"></i>
-                                {%else%}
-                                    <i class="fa-solid fa-star"></i>
-                                {%endif%}
-                            {%endfor%}
-                            </div>
-                        </td>
-                    </tr>
-                    {% if user != project.user %}
-                    <tr >
-                        <td colspan="2" align="center">
-                            <a class="btn btn-outline-danger mt-3 w-50" href="{% url 'report' id=project.id %}">Report</a>
-                        </td>
-                    </tr>
-                    {%endif%}
-                </table>
-            </div>
-
+        <div class="col-6 ps-3 pe-0">
+            <span class="text-muted float-end"
+                >({{project.reviews.all|length}})</span
+            >{% include "projects/partials/starrating.html" with
+            rates=project.rates %}
         </div>
     </div>
-    <div class="row gx-3">
-        <div class="col-12 col-lg-6 p-2">
-            <div class="bg-light rounded p-3" style="box-shadow: 0 0 5px;">
-                <a href="{% url 'create_comment' id=project.id %}" class="btn btn-outline-info float-end">Add Comment</a>
-                <h2>Comments</h2>
-                <div class="comments">
-                    <hr>
-                    {%if project.comments.all %}
-                        {%for review in project.comments.all%}
-                            {% include "projects/partials/commentcard.html" with comment=comment %}
-                        {%endfor%}
-                    {%else%}
-                        <h3>There are currently no comments!</h3>
-                    {%endif%}
-                </div>
-            </div>   
-        </div>
-        <div class="col-12 col-lg-6 p-2">
-            <div class="bg-light rounded p-3" style="box-shadow: 0 0 5px;">
-                <a href="{% url 'create_review' id=project.id %}" class="float-end btn btn-outline-info">Add Review</a>
-                <h2>Reviews</h2>
-                <div class="reviews">
-                    <hr>
-                    {%if project.reviews.all %}
-                        {%for review in project.reviews.all%}
-                            {% include "projects/partials/reviewcard.html" with review=review %}
-                        {%endfor%}
-                    {%else%}
-                        <h3>There are currently no reviews!</h3>    
-                    {%endif%}
-                </div>
-            </div>   
-        </div>
-    </div>
+    {% if inlist %}
+    <a
+        type="button"
+        class="btn btn-outline-dark"
+        href="{% url 'profile' pk=project.user.id %}"
+    >
+        <img
+            src="{{project.user.get_profile_picture}}"
+            onerror="this.onerror=null;this.src='/media/account/images/annon.png';"
+            alt="Avatar"
+            class="img-fluid rounded-circle me-2"
+            style="width: 25px"
+        />
+        {% if project.user.first_name
+        %}{{project.user.first_name}}{%else%}{{project.user}}{%endif%}
+    </a>
+    <a
+        href="{% url 'donate' pk=project.id %}"
+        class="btn btn-success float-end fs-5"
+        >Donate Now</a
+    >
+    {%endif%}
 </div>
-
-{% endblock %}
