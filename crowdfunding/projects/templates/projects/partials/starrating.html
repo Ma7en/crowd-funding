@@ -1,9 +1,12 @@
+
 <div class="rate">
-    {% for i in rates %} {% if i == 0.5 %}
-    <i class="fa-solid fa-star-half-stroke"></i>
-    {%elif i == 0%}
-    <i class="fa-regular fa-star"></i>
-    {%else%}
-    <i class="fa-solid fa-star"></i>
-    {%endif%} {%endfor%}
+    {% for i in rates %}
+        {% if i == 0.5 %}
+            <i class="fa-solid fa-star-half-stroke"></i>
+        {%elif i  == 0%}
+            <i class="fa-regular fa-star"></i>
+        {%else%}
+            <i class="fa-solid fa-star"></i>
+        {%endif%}
+    {%endfor%}
 </div>
