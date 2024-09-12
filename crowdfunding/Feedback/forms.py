@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review, Report, Comment
+from .models import *
 
 
 class ReviewForm(forms.ModelForm):
@@ -9,9 +9,14 @@ class ReviewForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-
     class Meta:
         model = Comment
+        fields = ["content"]
+
+
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = Reply
         fields = ["content"]
 
 

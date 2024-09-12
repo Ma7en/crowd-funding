@@ -38,6 +38,12 @@ class Review(models.Model):
 
         return rates_list
 
+    class Meta:
+        unique_together = (
+            "user",
+            "project",
+        )
+
 
 class Report(models.Model):
     reason = models.CharField(max_length=500)
@@ -50,6 +56,15 @@ class Report(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reports")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return self.reason
+
+    class Meta:
+        unique_together = (
+            "user",
+            "project",
+        )
 
 
 class Reply(models.Model):
