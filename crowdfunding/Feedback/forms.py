@@ -1,31 +1,21 @@
 from django import forms
-from .models import Review,Report, Comment
-
-
+from .models import Review, Report, Comment
 
 
 class ReviewForm(forms.ModelForm):
-    
-
     class Meta:
         model = Review
-        fields = ['review','rate']
-
-
+        fields = ["review", "rate"]
 
 
 class CommentForm(forms.ModelForm):
 
-	class Meta:
-		model = Comment
-		fields = ['content']
-
-
+    class Meta:
+        model = Comment
+        fields = ["content"]
 
 
 class ReportForm(forms.ModelForm):
     class Meta:
         model = Report
-        fields = ['reason','status']
-
-    
+        fields = ["reason", "status"]

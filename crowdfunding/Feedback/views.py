@@ -1,4 +1,4 @@
-from django.shortcuts import  render, redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .forms import ReportForm, ReviewForm, CommentForm
 from .models import Report, Review, Comment
@@ -6,38 +6,38 @@ from projects.models import Project
 from django.views import generic
 
 
-
-def report_list(request):
-    reports = Report.objects.all()
-    return render(request, 'reports/reports_list.html', {'reports': reports})
+class Reports(generic.ListView):
+    model = Report
+    context_object_name = "reports"
+    template_name = "reports/reports_list.html"
 
 
 class ReportProject(generic.CreateView):
     model = Report
     form_class = ReportForm
-    success_url = reverse_lazy('report_list')
-    template_name='reports/create.html'
+    success_url = reverse_lazy("report_list")
+    template_name = "reports/create.html"
 
 
-
-def report_comment(request, comment_id):
-    if request.method == 'POST':
+def report_comment(request, comment_id, pk):
+    if request.method == "POST":
         form = ReportForm(request.POST)
         if form.is_valid():
-            comment = Comment.objects.get(pk=comment_id)
+            comment = Comment.objects.get(id=comment_id)
+            project = Project.objects.get(id=pk)
             report = form.save(commit=False)
             report.comment = comment
+            report.project = project
             report.user = request.user
             report.save()
-            return redirect('project_detail', pk=comment.project.id)
+            return redirect("project_detail", pk=pk)
     else:
         form = ReportForm()
-    return render(request, 'feedback/report_comment.html', {'form': form})
-
+    return render(request, "reports/report_comment.html", {"form": form})
 
 
 def create_review(request, pk):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
@@ -45,25 +45,25 @@ def create_review(request, pk):
             review.project = project
             review.user = request.user
             review.save()
-            return redirect('project_detail', pk=pk)
+            return redirect("project_detail", pk=pk)
     else:
         form = ReviewForm()
-    return render(request, 'feedback/create_review.html', {'form': form})
+    return render(request, "feedback/create_review.html", {"form": form})
 
-    
-def create_comment( request , pk ):
-    if request.method == 'POST':
+
+def create_comment(request, pk):
+    if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
-                comment = form.save(commit=False)
-                project = Project.objects.get(id=pk)
-                comment.project = project
-                comment.user = request.user
-                comment.save()
-                return redirect('project_detail', pk=pk )
+            comment = form.save(commit=False)
+            project = Project.objects.get(id=pk)
+            comment.project = project
+            comment.user = request.user
+            comment.save()
+            return redirect("project_detail", pk=pk)
     else:
-           form = CommentForm()
-    return render(request, 'feedback/create_comment' , { 'form' : form } )
+        form = CommentForm()
+    return render(request, "feedback/create_comment", {"form": form})
 
 
 # @login_required
@@ -84,7 +84,3 @@ def create_comment( request , pk ):
 #       else:
 #            form = CommentForm()
 #       return render(request, 'reports/create.html' , { 'form' : form } )
-
-
-
- 
