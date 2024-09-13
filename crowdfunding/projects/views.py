@@ -20,6 +20,7 @@ def project_list(request):
 
 def project_detail(request, pk):
     project = get_object_or_404(Project, id=pk)
+    print(project.is_featured)
 
     # This query checks for any project within the same category or have a common tag
     similars = Project.objects.filter(
@@ -61,6 +62,37 @@ def donate(request, pk):
             HttpResponseBadRequest("Donation Amount is invalid")
 
     return redirect(reverse_lazy("project_detail", kwargs={"pk": pk}))
+
+@login_required
+def feature(request, pk):
+
+    project = get_object_or_404(Project, id=pk)
+    if request.user.is_superuser:
+        if project.is_featured:
+            project.is_featured=False
+
+        else:
+            project.is_featured=True
+
+
+        project.save()
+        print(project.is_featured )
+        return redirect(reverse_lazy('project_list'))
+
+    @login_required
+    def feature(request, pk):
+
+        project = get_object_or_404(Project, id=pk)
+        if request.user.is_superuser:
+            if project.is_featured:
+                project.is_featured = False
+
+            else:
+                project.is_featured = True
+
+            project.save()
+            print(project.is_featured)
+            return redirect(reverse_lazy('project_list'))
 
 
 class CreateProject(generic.CreateView):
