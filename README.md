@@ -450,6 +450,7 @@ python manage.py runserver
 ---
 
 ## 🧐 Features :
+
 <ul>
 <li>
     <b>User Authentication:</b> Secure registration, login, and password recovery.
@@ -488,6 +489,21 @@ Technologies used in the project:
 -   JS
 -   Bootstrap
 -   Fontawesome
+
+---
+
+<table>
+    <tr>
+        <td>
+            <img src="https://avatars.githubusercontent.com/u/15892077?v=4"></img>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="https://github.com/josspheenboles">josspheenboles</a>
+        </td>
+    </tr>
+</table>
 
 ---
 
