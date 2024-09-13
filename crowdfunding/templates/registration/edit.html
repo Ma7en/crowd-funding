@@ -14,16 +14,15 @@
         <div class="alert alert-danger p-3 mb-2" role="alert">
             {{ form.non_field_errors }}
         </div>
-        {% endif %} {% for field in form %}
+        {%endif%} {% for field in form %}
         <div class="mb-3">
-            {{ field.label_tag }} {{ field }} {% if field.errors %}
-            <div class="text-danger">{{ field.errors }}</div>
-            {% endif %}
+            {{ field.label_tag }} {{ field }} {{ field.errors }}
         </div>
-        {% endfor %}
-
+        {%endfor%}
         <div class="mb-3">
-            <label for="id_picture" class="form-label">Profile Picture</label>
+            <label for="picture-clear_id" class="form-label">
+                Profile Picture
+            </label>
             <input
                 type="file"
                 name="picture"
@@ -40,5 +39,4 @@
         </div>
     </form>
 </div>
-
 {% endblock %}

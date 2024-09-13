@@ -1,5 +1,9 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # apps
     "account.apps.AccountConfig",
     "home.apps.HomeConfig",
@@ -34,7 +39,11 @@ INSTALLED_APPS = [
     "Feedback.apps.FeedbackConfig",
     # packages
     "fontawesomefree",
-    "django_cleanup",
+    "crispy_bootstrap5",
+    "django_cleanup",  # remove unlinked images
+    "social_django",
+    "django_countries",  # add countries field to model
+    "crispy_forms",
     "jquery",
 ]
 
@@ -50,6 +59,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # social
+    "social_django.middleware.SocialAuthExceptionMiddleware",
 ]
 
 ROOT_URLCONF = "crowdfunding.urls"
@@ -65,6 +76,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect",
             ],
         },
     },
@@ -80,26 +93,20 @@ DATABASES = {
     "default": {
         # "ENGINE": "django.db.backends.sqlite3",
         # "NAME": BASE_DIR / "db.sqlite3",
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "crowd_funding",
-        "USER": "django_proj",
-        "PASSWORD": "django@@1",
-        "HOST": "localhost",
+        # "ENGINE": "django.db.backends.postgresql",
+        # "NAME": "crowd_funding",
+        # "USER": "django_proj",
+        # "PASSWORD": "django@@1",
+        # "HOST": "localhost",
+        "ENGINE": os.getenv("DB_ENGINE"),
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PORT": os.getenv("DB_PORT"),
+        "HOST": os.getenv("DB_HOST"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
     }
 }
 
-# Database for production
-"""
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': 'Abc_12345',
-        'HOST': '',
-    }
-}
-"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -135,10 +142,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# static files (CSS, JavaScript, Images)
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
-STATICFILES_DIRS = ["static/"]
 
+
+# media (Images)
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
@@ -146,14 +155,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 AUTH_USER_MODEL = "account.User"
 
 # django project
-# xckz zfki waip vhoq
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "m9ee9m@gmail.com"
-EMAIL_HOST_PASSWORD = "xckz zfki waip vhoq"
+EMAIL_HOST_PASSWORD = "iwzcwhqfzbeelnha"
 
 AUTHENTICATION_BACKENDS = (
     "social_core.backends.github.GithubOAuth2",  # github <----
@@ -164,13 +171,13 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
-SOCIAL_AUTH_GITHUB_KEY = "40d06a2a3d0d62d74dbd"
-SOCIAL_AUTH_GITHUB_SECRET = "3c725f49cb9edf369b33b23c1ecf9b3d9bc95cdc"
+SOCIAL_AUTH_GITHUB_KEY = "Ov23liA11W7iSxyxuJtF"
+SOCIAL_AUTH_GITHUB_SECRET = "a430432ca4d92da4abe1b58137d2da5281c47be8"
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "index"
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = (
-    "534268798718-451t7sn6c7iuu8ts9jqvbhjtalg2vqa4.apps.googleusercontent.com"
+    "462049134181-lj4e9fue66p17ruu2haa6tj48mh7vgo0.apps.googleusercontent.com"
 )
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 SOCIAL_AUTH_FACEBOOK_KEY = "3738217359745570"
 SOCIAL_AUTH_FACEBOOK_SECRET = "7fdf8462e923299f9b618e46656fd6b9"
 

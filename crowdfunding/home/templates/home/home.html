@@ -1,26 +1,31 @@
-{% extends 'home/base.html' %} {% load static %} {% block content %}
+{% extends 'home/base.html' %} {% load static %}
+
+<!-- content -->
+{% block content %}
 <style>
-  .float{
-      position:fixed;
-      bottom:40px;
-      right:40px;
-      text-align:center;
-      box-shadow: 2px 2px 3px #999;
-      z-index: 5;
-  }
+    .float {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        text-align: center;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 5;
+    }
 
-  .my-float{
-      margin-top:22px;
-  }
-
+    .my-float {
+        margin-top: 22px;
+    }
 </style>
 
 <div class="container position-relative" id="Home">
-      {% if user %}
-    <a href="{% url 'project_create' %}" class="float p-3 fs-5 rounded-pill bg-info text-decoration-none text-light">
+    {% if user %}
+    <a
+        href="{% url 'project_create' %}"
+        class="float p-3 fs-5 rounded-pill bg-info text-decoration-none text-light"
+    >
         <i class="fa fa-plus"></i> Add a new project
     </a>
-  {%endif%}
+    {%endif%}
     <!-- Featured Projects -->
     {% if featured_projects %}
     <div class="join my-5">
@@ -179,7 +184,10 @@
         <div class="row mt-2 gy-3 row-cols-1 row-cols-md-2 row-cols-lg-3">
             {% for project in top_rated_projects %}
             <div class="col">
-                <div class="card position-relative mx-1 rounded" style="height: 550px;">
+                <div
+                    class="card position-relative mx-1 rounded"
+                    style="height: 550px"
+                >
                     {% include "projects/partials/projectinfo.html" with
                     project=project inlist=1 %}
                 </div>
@@ -198,7 +206,10 @@
         >
             {% for project in latest_projects %}
             <div class="col">
-                <div class="card position-relative mx-1 rounded" style="height: 550px;">
+                <div
+                    class="card position-relative mx-1 rounded"
+                    style="height: 550px"
+                >
                     {% include "projects/partials/projectinfo.html" with
                     project=project inlist=1 %}
                 </div>
@@ -212,8 +223,9 @@
                 class="btn btn-primary w-50 mx-auto"
                 href="{% url 'project_create' %}"
                 style="margin-bottom: 10px"
-                >Add Project</a
             >
+                Add Project
+            </a>
         </div>
         {% endif %}
     </div>

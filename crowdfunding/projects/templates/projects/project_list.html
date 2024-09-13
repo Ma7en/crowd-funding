@@ -1,4 +1,7 @@
-{% extends "home/base.html" %} {% block content %}
+{% extends "home/base.html" %}
+
+<!-- content -->
+{% block content %}
 <style>
     .float {
         position: fixed;
@@ -12,7 +15,6 @@
     .my-float {
         margin-top: 22px;
     }
-
 </style>
 <br />
 
@@ -39,7 +41,10 @@
     >
         {% for project in projects %}
         <div class="col">
-            <div class="card position-relative mx-1 rounded" style="height: 550px;">
+            <div
+                class="card position-relative mx-1 rounded"
+                style="height: 550px"
+            >
                 {% include "projects/partials/projectinfo.html" with
                 project=project inlist=1 %}
             </div>

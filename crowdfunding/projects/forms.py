@@ -7,6 +7,7 @@ from django.core.validators import validate_image_file_extension
 from django.core.exceptions import ValidationError
 
 
+# =================================================================
 class MultipleFileInput(ClearableFileInput):
     allow_multiple_selected = True
 

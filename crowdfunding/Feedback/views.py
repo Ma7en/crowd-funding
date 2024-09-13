@@ -10,6 +10,7 @@ from .models import Report, Review, Comment
 from projects.models import Project
 
 
+# =================================================================
 class ReportsList(generic.ListView):
     model = Report
     context_object_name = "reports"

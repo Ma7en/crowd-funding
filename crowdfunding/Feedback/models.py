@@ -38,6 +38,7 @@ class Review(models.Model):
 
         return rates_list
 
+
 class Report(models.Model):
     reason = models.CharField(max_length=500)
     status = models.CharField(max_length=15)

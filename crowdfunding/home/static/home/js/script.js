@@ -30,3 +30,14 @@ $(document).ready(function () {
         $("#myInput").trigger("focus");
     });
 });
+
+$("a.featured").click(function (e) {
+    console.log(this.getAttribute("href"));
+    e.preventDefault();
+    $.ajax({
+        url: this.getAttribute("href"),
+        type: "GET",
+    });
+    this.firstElementChild.classList.toggle("fa-solid");
+    this.firstElementChild.classList.toggle("fa-regular");
+});

@@ -16,9 +16,9 @@
         </h3>
         {%if not oauth %}
         <div class="form-outline mb-3">
-            <label for="id_password" class="form-label"
-                >Please enter your password for confirmation:</label
-            >
+            <label for="id_password" class="form-label">
+                Please enter your password for confirmation:
+            </label>
             <input
                 type="password"
                 name="password"
@@ -33,12 +33,14 @@
             <a
                 href="{%url 'index'%}"
                 class="btn btn-outline-secondary btn-block w-25"
-                >Cancel</a
             >
+                Cancel
+            </a>
             <button type="submit" class="btn btn-danger btn-block w-25">
                 Confirm
             </button>
         </div>
     </form>
 </div>
+
 {% endblock %}

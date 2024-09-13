@@ -16,5 +16,5 @@ urlpatterns = [
     path("logout/", login_required(Logout), name="logout"),
     # Imports
     path("", include("django.contrib.auth.urls")),
-    path('oauth/', include('social_django.urls'),name='social')
+    path("oauth/", include("social_django.urls"), name="social"),
 ]

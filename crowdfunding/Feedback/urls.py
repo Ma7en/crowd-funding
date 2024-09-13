@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import *
 
+# =================================================================
 urlpatterns = [
     path("reports", ReportsList.as_view(), name="report_list"),
     path("<int:pk>/report", Report.as_view(), name="report"),

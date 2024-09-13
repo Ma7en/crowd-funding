@@ -6,6 +6,10 @@ migrations/
 migrations
 notes
 notes/
+wvenv
+wvenv/
+venv
+venv/
 
 # Distribution / packaging
 .dist/

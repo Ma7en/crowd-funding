@@ -13,16 +13,18 @@ from operator import or_
 from functools import reduce
 
 
+# =================================================================
 def project_list(request):
     projects = Project.objects.all()
+
     return render(request, "projects/project_list.html", {"projects": projects})
 
 
 def project_detail(request, pk):
     project = get_object_or_404(Project, id=pk)
     print(project.is_featured)
-
     # This query checks for any project within the same category or have a common tag
+    # similars = Project.objects.filter(category=project.category).exclude(id=pk)[:4]
     similars = Project.objects.filter(
         reduce(
             or_,
@@ -63,39 +65,17 @@ def donate(request, pk):
 
     return redirect(reverse_lazy("project_detail", kwargs={"pk": pk}))
 
+
 @login_required
 def feature(request, pk):
-
     project = get_object_or_404(Project, id=pk)
     if request.user.is_superuser:
-        if project.is_featured:
-            project.is_featured=False
-
-        else:
-            project.is_featured=True
-
-
+        project.is_featured = not project.is_featured
         project.save()
-        print(project.is_featured )
-        return redirect(reverse_lazy('project_list'))
-
-    @login_required
-    def feature(request, pk):
-
-        project = get_object_or_404(Project, id=pk)
-        if request.user.is_superuser:
-            if project.is_featured:
-                project.is_featured = False
-
-            else:
-                project.is_featured = True
-
-            project.save()
-            print(project.is_featured)
-            return redirect(reverse_lazy('project_list'))
+    return redirect(reverse_lazy("project_list"))
 
 
-class CreateProject(generic.CreateView):
+class CreateProject(LoginRequiredMixin, generic.CreateView):
     model = Project
     form_class = ProjectFileForm
     success_url = reverse_lazy("project_list")
@@ -112,6 +92,26 @@ class CreateProject(generic.CreateView):
                 Photo.objects.create(project=self.object, photo=f)
 
         return super().form_valid(form)
+
+
+# @login_required
+# def create_project(request):
+#     if request.method == 'POST':
+#         form = ProjectFileForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             project = form.save(commit=False)
+#             project.user = request.user
+#             project.save()
+
+#             files = request.FILES.getlist('file')
+#             for f in files:
+#                 Photo.objects.create(project=project, photo=f)
+
+#             return redirect('project_list')
+#     else:
+#         form = ProjectFileForm()
+
+#     return render(request, 'projects/project_form.html', {'form': form})
 
 
 class EditProjectView(LoginRequiredMixin, UpdateView):
@@ -134,6 +134,28 @@ class EditProjectView(LoginRequiredMixin, UpdateView):
         if obj.user != self.request.user:
             raise PermissionDenied("You are not authorized to edit this project.")
         return obj
+
+
+# @login_required
+# def edit_project(request, pk):
+#     project = get_object_or_404(Project, pk=pk)
+#     if project.user != request.user:
+#         raise PermissionDenied("You are not authorized to edit this project.")
+
+#     if request.method == 'POST':
+#         form = ProjectFileForm(request.POST, request.FILES, instance=project)
+#         if form.is_valid():
+#             form.save()
+
+#             files = request.FILES.getlist('file')
+#             for f in files:
+#                 Photo.objects.create(project=project, photo=f)
+
+#             return redirect('project_list')
+#     else:
+#         form = ProjectFileForm(instance=project)
+
+#     return render(request, 'projects/project_form.html', {'form': form, 'edit': True})
 
 
 class CategoryView(generic.ListView):
