@@ -10,9 +10,7 @@ wvenv
 wvenv/
 venv
 venv/
-.env/
-env
-.env
+
 
 # Distribution / packaging
 .dist/
