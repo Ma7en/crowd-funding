@@ -5,7 +5,6 @@
 <p>
 This project aims to create a comprehensive online crowdfunding platform specifically designed for the Egyptian market. The platform will enable individuals and organizations to launch fundraising campaigns for various projects, while allowing users to contribute to these initiatives. Key features include a user-friendly interface, secure authentication, robust project management tools, and a variety of options for users to engage with and support campaigns. By providing a centralized platform for crowdfunding in Egypt, this project seeks to foster community engagement, support innovative ideas, and facilitate economic development. 
 </p>
----
 
 ## 🔧 Github Commands :-
 
