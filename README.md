@@ -1,7 +1,10 @@
 <h1 align="center" id="title">Crowd Funding Web App - ITI</h1>
 
-<p id="description">Description</p>
+<h2 id="description">Description</h2>
 
+<p>
+This project aims to create a comprehensive online crowdfunding platform specifically designed for the Egyptian market. The platform will enable individuals and organizations to launch fundraising campaigns for various projects, while allowing users to contribute to these initiatives. Key features include a user-friendly interface, secure authentication, robust project management tools, and a variety of options for users to engage with and support campaigns. By providing a centralized platform for crowdfunding in Egypt, this project seeks to foster community engagement, support innovative ideas, and facilitate economic development. 
+</p>
 ---
 
 ## 🔧 Github Commands :-
@@ -447,7 +450,31 @@ python manage.py runserver
 
 ---
 
-## 🧐 Features :-
+## 🧐 Features :
+<ul>
+<li>
+    <b>User Authentication:</b> Secure registration, login, and password recovery.
+</li>
+
+<li>
+    <b>Project Creation:</b> Users can launch fundraising campaigns with detailed information.
+</li>
+<li>
+    <b>Project Management:</b> Features for viewing, commenting, rating, and reporting projects.
+</li>
+<li>
+    <b>Donations:</b> Users can contribute to project targets. 
+</li>
+<li>
+    <b>Homepage:</b> Displays featured, latest, and categorized projects. 
+</li>
+<li>
+    <b>Search:</b> Allows users to find projects by title or tag. 
+</li>
+<li>
+    <b>Additional Features:</b> Social login, user profiles, and notifications.
+</li>
+</ul>
 
 ---
 
