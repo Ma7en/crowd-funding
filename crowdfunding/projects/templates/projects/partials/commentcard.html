@@ -10,7 +10,7 @@
                     src="{{comment.user.get_profile_picture}}"
                     alt=""
                 />
-                <h6 class="m-0 text-dark">@{{comment.user}}</h6>
+                <h6 class="m-0 text-dark">@{{comment.user.full_name}}</h6>
             </a>
         </div>
         <div class="col-9">
@@ -69,7 +69,7 @@
                             src="{{reply.user.get_profile_picture}}"
                             alt=""
                         />
-                        <p class="m-0 text-dark">@{{reply.user}}</p>
+                        <p class="m-0 text-dark">@{{reply.user.full_name}}</p>
                     </a>
                 </div>
                 <div class="col-9">

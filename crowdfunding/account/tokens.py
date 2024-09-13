@@ -4,7 +4,6 @@ from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode
-from django.contrib.sites.shortcuts import get_current_site
 
 
 class TokenGenerator(PasswordResetTokenGenerator):
@@ -20,12 +19,13 @@ account_activation_token = TokenGenerator()
 
 
 def send_verification_email(request, user):
+
     mail_subject = "Activate your CrowdFunder account."
     message = render_to_string(
         "registration/acc_active_email.html",
         {
             "user": user,
-            "domain": get_current_site(request).domain,
+            "domain": request.META["HTTP_HOST"],
             "uid": force_str(urlsafe_base64_encode(force_bytes(user.pk))),
             "token": account_activation_token.make_token(user),
         },

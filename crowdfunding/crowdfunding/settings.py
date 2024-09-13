@@ -12,9 +12,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-+6_wtkz^6l!88xben4zu7+=p4h!_s3_2s7i-1k((7t+y6u*obj"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+DEBUG = False
+
+ALLOWED_HOSTS = ["ascoura.pythoneverywhere.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -87,6 +88,18 @@ DATABASES = {
     }
 }
 
+# Database for production
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': 'Abc_12345',
+        'HOST': '',
+    }
+}
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -123,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
 STATICFILES_DIRS = ["static/"]
 
 MEDIA_URL = "media/"
@@ -163,7 +177,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = "7fdf8462e923299f9b618e46656fd6b9"
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
     "https://www.googleapis.com/auth/userinfo.email",
 ]
-SOCIAL_AUTH_GITHUB_SCOPE = ["user:email"]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
