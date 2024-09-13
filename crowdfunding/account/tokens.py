@@ -20,7 +20,7 @@ account_activation_token = TokenGenerator()
 
 def send_verification_email(request, user):
 
-    mail_subject = "Activate your CrowdFunder account."
+    mail_subject = "Activate your CrowdFunding account."
     message = render_to_string(
         "registration/acc_active_email.html",
         {

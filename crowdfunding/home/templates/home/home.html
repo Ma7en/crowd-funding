@@ -1,7 +1,4 @@
-{% extends 'home/base.html' %} {% load static %}
-
-<!-- content -->
-{% block content %}
+{% extends 'home/base.html' %} {% load static %} {% block content %}
 <style>
     .float {
         position: fixed;
@@ -188,8 +185,9 @@
                     class="card position-relative mx-1 rounded"
                     style="height: 550px"
                 >
-                    {% include "projects/partials/projectinfo.html" with
-                    project=project inlist=1 %}
+                  <!--  -->
+                  {% include "projects/partials/projectinfo.html" with project=project inlist=1 %}
+                  <!--  -->
                 </div>
             </div>
             {%endfor%}
@@ -210,8 +208,9 @@
                     class="card position-relative mx-1 rounded"
                     style="height: 550px"
                 >
-                    {% include "projects/partials/projectinfo.html" with
-                    project=project inlist=1 %}
+                <!--  -->
+                {% include "projects/partials/projectinfo.html" with project=project inlist=1 %}
+                <!--  -->
                 </div>
             </div>
             {% endfor %}
@@ -223,12 +222,12 @@
                 class="btn btn-primary w-50 mx-auto"
                 href="{% url 'project_create' %}"
                 style="margin-bottom: 10px"
+                >Add Project</a
             >
-                Add Project
-            </a>
         </div>
         {% endif %}
     </div>
+</div>
 </div>
 
 {% endblock %}

@@ -1,7 +1,4 @@
-{% extends "home/base.html" %}
-
-<!-- content -->
-{% block content %}
+{% extends "home/base.html" %} {% block content %}
 <style>
     .float {
         position: fixed;
@@ -45,12 +42,14 @@
                 class="card position-relative mx-1 rounded"
                 style="height: 550px"
             >
-                {% include "projects/partials/projectinfo.html" with
-                project=project inlist=1 %}
+                <!--  -->
+                {% include "projects/partials/projectinfo.html" with project=project inlist=1 %}
+                <!--  -->
             </div>
         </div>
 
         {% endfor %}
     </div>
+</div>
 </div>
 {% endblock %}

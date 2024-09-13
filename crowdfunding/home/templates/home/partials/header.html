@@ -41,10 +41,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About us</a>
+                    <a class="nav-link" href="{% url 'about_me' %}">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact us</a>
+                    <a class="nav-link" href="{% url 'contact' %}"
+                        >Contact us</a
+                    >
                 </li>
             </ul>
             <ul class="d-flex justify-content-between align-items-center m-0">
@@ -64,6 +66,7 @@
                         <i class="fa fa-search text-light fs-4"></i>
                     </button>
                 </form>
+                <!--  -->
                 {% if user.id %}
                 <div class="btn-group">
                     <a
@@ -79,8 +82,15 @@
                             class="img-fluid rounded-circle me-2"
                             style="width: 30px"
                         />
-                        {% if user.first_name
-                        %}{{user.first_name}}{%else%}{{user}}{%endif%}
+                        {% if user.first_name %}
+                        <!--  -->
+                        {{ user.first_name }}
+                        <!--  -->
+                        {% else %}
+                        <!--  -->
+                        {{user}}
+                        <!--  -->
+                        {% endif %}
                     </a>
                     <button
                         type="button"
@@ -91,41 +101,40 @@
                     >
                         <i class="fa-solid fa-gear"></i>
                     </button>
+
                     <ul class="dropdown-menu">
                         <li>
                             <a
                                 class="dropdown-item"
                                 href="{% url 'profile' pk=user.id%}#projects"
+                                >Your Projects</a
                             >
-                                Your Projects
-                            </a>
                         </li>
                         <li>
                             <a
                                 class="dropdown-item"
                                 href="{% url 'profile' pk=user.id%}#donations"
+                                >Your Donations</a
                             >
-                                Your Donations
-                            </a>
                         </li>
                         <li>
                             <a
                                 class="dropdown-item"
                                 href="{% url 'editprofile' %}"
+                                >Edit Profile</a
                             >
-                                Edit Profile
-                            </a>
                         </li>
                         <li><hr class="dropdown-divider" /></li>
                         <li>
-                            <a class="dropdown-item" href="{% url 'logout' %}">
-                                Logout
-                            </a>
+                            <a class="dropdown-item" href="{% url 'logout' %}"
+                                >Logout</a
+                            >
                         </li>
                     </ul>
                 </div>
-
                 {% else %}
+                <!--  -->
+
                 <li class="nav-item">
                     <a class="nav-link m-0" href="{% url 'login' %}">Login</a>
                 </li>

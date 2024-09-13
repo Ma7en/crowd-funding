@@ -1,317 +1,199 @@
-{% extends "home/base.html" %} {% load static %}
+{% extends "home/base.html" %}
+{% load static %}
 
-<!-- content -->
 {% block content %}
 
-<div class="container my-2 p-3 rounded">
-    <div class="row gx-3 bg-light my-3" style="box-shadow: 0 0 5px">
+<div class="container my-2  p-3 rounded">
+    <div class="row gx-3 bg-light my-3" style="box-shadow: 0 0 5px;">
         <div class="col-12 col-lg-8 my-auto p-2 rounded">
-            {% if project.all_photos|length > 1 %}
-            <div
-                id="carouselExampleIndicators"
-                class="carousel slide"
-                data-bs-ride="carousel"
-            >
-                <ol class="carousel-indicators">
-                    {% for photo in project.all_photos %}
-                    <li
-                        data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="{{ forloop.counter0 }}"
-                        {%
-                        if
-                        forloop.first
-                        %}class="active"
-                        {%
-                        endif
-                        %}
-                    ></li>
-                    {% endfor %}
-                </ol>
-                <div class="carousel-inner">
-                    {% for photo in project.all_photos %}
-                    <div
-                        class="carousel-item {% if forloop.first %}active{% endif %}"
-                    >
-                        <img
-                            src="{{ photo }}"
-                            class="d-block w-100"
-                            alt="project photo"
-                            style="object-fit: cover"
-                        />
-                    </div>
-                    {% endfor %}
-                </div>
-                <a
-                    class="carousel-control-prev"
-                    href="#carouselExampleIndicators"
-                    role="button"
-                    data-bs-slide="prev"
-                >
-                    <span
-                        class="carousel-control-prev-icon"
-                        aria-hidden="true"
-                    ></span>
-                    <span class="visually-hidden">Previous</span>
-                </a>
-                <a
-                    class="carousel-control-next"
-                    href="#carouselExampleIndicators"
-                    role="button"
-                    data-bs-slide="next"
-                >
-                    <span
-                        class="carousel-control-next-icon"
-                        aria-hidden="true"
-                    ></span>
-                    <span class="visually-hidden">Next</span>
-                </a>
-            </div>
+            {% if project.all_photos|length > 1 %} 
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        {% for photo in project.all_photos %}
+                        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for photo in project.all_photos %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ photo }}" class="d-block w-100" alt="project photo" style="object-fit: cover;">
+                        </div>
+                        {% endfor %}
+                    </div> 
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div> 
             {% else %}
-            <div class="card">
-                <img
-                    src="{{project.thumbnail}}"
-                    class="card-img"
-                    alt="thumbnail"
-                    style="object-fit: cover"
-                />
-            </div>
+                <div class="card">
+                    <img src="{{project.thumbnail}}" class="card-img" alt="thumbnail" style="object-fit: cover;">
+                </div>  
             {%endif%}
+            
         </div>
-        <div class="col-12 col-lg-4 p-3 position-relative">
+        <div class="col-12 col-lg-4 p-3 position-relative" >
             {%if user == project.user %}
-            <div
-                class="control position-absolute"
-                style="right: 20px; top: 65px"
-            >
-                <a
-                    class="btn btn-outline-dark"
-                    href="{% url 'edit_project' pk=project.id %}"
-                    ><i class="fa-solid fa-pen-to-square"></i
-                ></a>
-                <a
-                    class="btn btn-outline-danger"
-                    href="{% url 'project_delete' pk=project.id %}"
-                    ><i class="fa-solid fa-x"></i
-                ></a>
+            <div class="control position-absolute" style="right: 20px; top: 65px;">
+                <a class="btn btn-outline-dark" href="{% url 'edit_project' pk=project.id %}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="btn btn-outline-danger" href="{% url 'project_delete' pk=project.id %}"><i class="fa-solid fa-x"></i></a>    
             </div>
             {%endif%}
             <h1 class="card-title fw-bold">{{project.title}}</h1>
             <div class="card-text ps-3">
                 {%if project.expired %}
-                <span class="badge bg-warning text-light">Expired</span>
+                    <span class="badge bg-warning text-light">Expired</span>
                 {% else %}
-                <span class="badge bg-success text-light fs-6">Active</span>
-                <p class="ms-3 d-inline">
-                    <i class="fa-regular fa-clock me-2"></i
-                    >{{project.remaining_time}} days left!
-                </p>
-                {%endif%}
+                    <span class="badge bg-success text-light fs-6">Active</span>
+                    <p class="ms-3 d-inline"><i class="fa-regular fa-clock me-2"></i>{{project.remaining_time}} days left!</p>
+                {%endif%}                
             </div>
-            <hr />
+            <hr>
             <div class="card-text">
-                <h3>Description:</h3>
+                <h3>Description: </h3>
                 <p>{{ project.details}}</p>
             </div>
 
-            {% include "projects/partials/progressbar.html" with project=project
-            %}
+            {% include "projects/partials/progressbar.html" with project=project %}
 
-            <form
-                method="POST"
-                class="input-group mb-3 mt-4"
-                hidden
-                action="{% url 'donate' pk=project.id %}"
-                id="dform"
-                role="donate"
-            >
+            <form method="POST" class="input-group mb-3 mt-4" hidden action="{% url 'donate' pk=project.id %}" id="dform" role="donate" >
                 {% csrf_token %}
-                <input
-                    type="number"
-                    class="form-control"
-                    min="0"
-                    placeholder="Amount"
-                    name="donate"
-                />
-                <button
-                    class="btn btn-outline-secondary"
-                    type="submit"
-                    id="donate"
-                >
-                    Add
-                </button>
+                <input type="number" class="form-control" min="0" placeholder="Amount" name="donate">
+                <button class="btn btn-outline-secondary"  type="submit" id="donate">Add</button>
             </form>
             <div class="d-flex justify-content-center">
-                {% if project.raised_money >= project.total_target or
-                project.expired %}
-                <button class="btn btn-success m-3" disabled id="donate_now">
-                    Amount Raised!
-                </button>
+                
+                {% if project.raised_money >=  project.total_target or project.expired %}
+                    <button class="btn btn-success m-3" disabled id="donate_now">Amount Raised!</button>
                 {% else %}
-                <button class="btn btn-success m-3" id="donate_now">
-                    Donate Now
-                </button>
+                    <button class="btn btn-success m-3" id="donate_now">Donate Now</button>
                 {% endif %}
+                
             </div>
 
-            <hr />
+            <hr>
             <div class="card-text">
                 <table class="table table-borderless">
                     {%if project.tags%}
                     <tr>
                         <td>Tags:</td>
-                        <td align="center">
+                        <td  align="center">
                             {% for tag in project.tags_array %}
-                            <a
-                                class="badge bg-info text-dark text-decoration-none"
-                                href="{% url 'tag' tag=tag%}"
-                                >{{ tag }}</a
-                            >
+                                <a class="badge bg-info text-dark text-decoration-none" href="{% url 'tag' tag=tag%}">{{ tag }}</a>
                             {%endfor%}
                         </td>
                     </tr>
                     {%endif%}
                     <tr>
                         <td>Category:</td>
-                        <td align="center">
-                            <a
-                                class="badge bg-warning text-dark text-decoration-none"
-                                href="{%url 'category' category=project.category%}"
-                                >{{project.category}}</a
-                            >
+                        <td  align="center"> 
+                            <a class="badge bg-warning text-dark text-decoration-none" 
+                            href="{%url 'category' category=project.category%}">{{project.category}}</a>
                         </td>
                     </tr>
                     <tr>
                         <td>Reviews</td>
                         <td align="center">
-                            <span
-                                class="text-muted position-absolute"
-                                style="right: 30px"
-                                >({{project.reviews.all|length}})</span
-                            >{% include "projects/partials/starrating.html" with
-                            rates=project.rates %}
+                            <span class="text-muted position-absolute" style="right: 30px;">({{project.reviews.all|length}})</span>
+                            <!--  -->
+                            {% include "projects/partials/starrating.html" with rates=project.rates %}
+                            <!--  -->
                         </td>
                     </tr>
                     {% if user != project.user %}
-                    <tr>
+                    <tr >
                         <td colspan="2" align="center">
-                            <a
-                                class="btn btn-outline-danger mt-3 w-50"
-                                href="{% url 'report' pk=project.id %}?type=project"
-                                >Report</a
-                            >
+                            <a class="btn btn-outline-danger mt-3 w-50" href="{% url 'report' pk=project.id %}?type=project">Report</a>
                         </td>
                     </tr>
                     {%endif%}
                 </table>
             </div>
+
         </div>
     </div>
 
     <div class="row gx-3">
         <div class="col-12 col-lg-6 p-0 my-3">
-            <div
-                class="bg-light rounded p-3"
-                style="box-shadow: 0 0 5px; min-height: 25vh"
-            >
-                <button
-                    class="btn btn-outline-info float-end"
-                    id="show_comment_form"
-                >
-                    Add Comment
-                </button>
-                <h2 style="height: 32px">Comments</h2>
-                <div class="comments" style="max-height: 70vh; overflow: auto">
-                    <form
-                        method="POST"
-                        id="comment_form"
-                        action="{% url 'create_comment' pk=project.id %}"
-                        class="pt-2 pb-5 border-0 mx-2"
-                        hidden
-                    >
-                        {%csrf_token%}
-                        <div class="d-flex flex-start w-100">
-                            <img
-                                class="rounded-circle shadow-1-strong me-3"
-                                src="{{user.get_profile_picture}}"
-                                alt="avatar"
-                                width="40"
-                                height="40"
-                            />
-                            <div class="form-outline w-100">
-                                <textarea
-                                    class="form-control"
-                                    required
-                                    name="content"
-                                    rows="4"
-                                    style="background: #fff"
-                                ></textarea>
+            <div class="bg-light rounded p-3" style="box-shadow: 0 0 5px; min-height: 25vh;">
+                <button  class="btn btn-outline-info float-end" id="show_comment_form">Add Comment</button>
+                <h2 style="height: 32px;">Comments</h2>
+                <div class="comments" style="max-height: 70vh; overflow: auto;">
+                        <form method="POST" id="comment_form" action="{% url 'create_comment' pk=project.id %}" 
+                        class="pt-2 pb-5 border-0 mx-2" hidden>
+                            {%csrf_token%}
+                            <div class="d-flex flex-start w-100">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                src="{{user.get_profile_picture}}" alt="avatar" width="40"
+                                height="40" />
+                                <div class="form-outline w-100">
+                                <textarea class="form-control" required name="content" rows="4"
+                                    style="background: #fff;"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="float-end mt-2 pt-1">
-                            <button
-                                type="submit"
-                                class="btn btn-primary btn-sm"
-                            >
-                                Post comment
-                            </button>
-                            <button
-                                type="button"
-                                class="btn btn-outline-primary btn-sm"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                    <hr />
-                    {%if project.comments.all %} {%for comment in
-                    project.comments.all%} {% include
-                    "projects/partials/commentcard.html" with comment=comment %}
-                    {%endfor%} {%else%}
-                    <h3>There are currently no comments!</h3>
+                            <div class="float-end mt-2 pt-1">
+                                <button type="submit" class="btn btn-primary btn-sm">Post comment</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
+                            </div>
+                        </form>
+                    <hr>
+                    {%if project.comments.all %}
+                        {%for comment in project.comments.all%}
+                            {% include "projects/partials/commentcard.html" with comment=comment %}
+                        {%endfor%}
+                    {%else%}
+                        <h3>There are currently no comments!</h3>
                     {%endif%}
+
                 </div>
-            </div>
+            </div>   
         </div>
         <div class="col-12 col-lg-6 p-0 ps-md-2 my-3 h-100">
-            <div
-                class="bg-light rounded p-3"
-                style="box-shadow: 0 0 5px; min-height: 25vh"
-            >
-                {% if project.user != user %} {% include
-                "projects/partials/addreviewcard.html" with projectid=project.id
-                %} {%endif%}
-                <h2 style="height: 32px">Reviews</h2>
-                <div class="reviews" style="max-height: 70vh; overflow: auto">
-                    <hr />
-                    {%if project.reviews.all %} {%for review in
-                    project.reviews.all%} {% include
-                    "projects/partials/reviewcard.html" with review=review %}
-                    {%endfor%} {%else%}
-                    <h3>There are currently no reviews!</h3>
+            <div class="bg-light rounded p-3" style="box-shadow: 0 0 5px; min-height: 25vh;">
+                {% if project.user != user %}
+                    {% include "projects/partials/addreviewcard.html" with projectid=project.id %}
+                {%endif%}
+                <h2 style="height: 32px;">Reviews</h2>
+                <div class="reviews" style="max-height: 70vh;overflow: auto;">
+                    <hr>
+                    {%if project.reviews.all %}
+                        {%for review in project.reviews.all%}
+                            {% include "projects/partials/reviewcard.html" with review=review %}
+                        {%endfor%}
+                    {%else%}
+                        <h3>There are currently no reviews!</h3>    
                     {%endif%}
                 </div>
-            </div>
-        </div>
+            </div>   
+        </div> 
     </div>
 
-    <div class="row bg-light rounded p-3" style="box-shadow: 0 0 5px">
+    <div class="row bg-light rounded p-3" style="box-shadow: 0 0 5px;">
         <h2>Similar Projects</h2>
         {% if similars %}
-        <div
-            class="list-group list-group-horizontal overflow-auto"
-            style="height: 550px"
-        >
+        <div class="list-group list-group-horizontal overflow-auto" style="height: 550px;">
             {% for project in similars %}
             <div class="list-group-item border-0">
-                <div class="card h-100" style="width: 20rem">
-                    {% include "projects/partials/projectinfo.html" with
-                    project=project %}
+                <div class="card h-100" style="width: 20rem;">
+                  <!--  -->
+                  {% include "projects/partials/projectinfo.html" with project=project %}
+                  <!--  -->
                 </div>
-            </div>
-            {% endfor %} {% else %}
-            <h3 style="margin: 30px 450px">There are no Similar project</h3>
-        </div>
+              </div>
+            {% endfor %}     
+        {% else %}
+            <h3 style="margin: 30px 450px ;">There are no Similar project</h3> 
+           </div> 
         {% endif %}
+        
+      </div>
     </div>
+   
+</div>
 </div>
 {% endblock %}
+
