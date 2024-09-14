@@ -266,6 +266,18 @@ python3 manage.py migrate
 python3 manage.py createsuperuser
 ```
 
+```
+django_proj
+```
+
+```
+django_proj@gmail.com
+```
+
+```
+django@@1
+```
+
 `Step 8` : Run Server.
 
 ```
@@ -491,7 +503,7 @@ Technologies used in the project:
 -   Fontawesome
 
 ---
-
+<h1>Under The Supervision of:</h1>
 <table>
     <tr>
         <td>

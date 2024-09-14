@@ -15,7 +15,7 @@
 </style>
 <br />
 
-<div class="container mt-2 mb-5">
+<div class="container mt-2 mb-5 text-white">
     {% if category %}
     <h2>Your are viewing all projects in {{category}} Category</h2>
     {% elif tag %}
@@ -25,12 +25,12 @@
     {% else %} {% if user %}
     <a
         href="{% url 'project_create' %}"
-        class="float p-3 fs-5 rounded-pill bg-info text-decoration-none text-light"
+        class="float p-3 fs-5 rounded-pill bg-secondary text-decoration-none text-light"
     >
         <i class="fa fa-plus"></i> Add a new project
     </a>
     {%endif%}
-    <h2>Explore all current projects</h2>
+    <h2 class="text-white">Explore all current projects</h2>
     {%endif%}
 
     <div
@@ -39,7 +39,7 @@
         {% for project in projects %}
         <div class="col">
             <div
-                class="card position-relative mx-1 rounded"
+                class="card bg-dark text-white position-relative mx-1 rounded"
                 style="height: 550px"
             >
                 <!--  -->

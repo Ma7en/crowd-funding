@@ -51,7 +51,7 @@
                         <h6>{{profileuser.email}}</h6>
                         <p class="text-muted">Email</p>
                         {% if profileuser.is_active %}
-                        <span class="badge bg-success">Activated</span>
+                        <span class="badge bg-secondary">Activated</span>
                         {% endif %}
                       </div>
                       <div class="col-6 mb-3">
@@ -99,7 +99,7 @@
                         {%endfor%}
                       </div>
                     {%else%}
-                        <h4 class="d-flex m-0 align-items-center justify-content-center">You have no projects!<a class="m-0 ms-5 btn btn-primary" href="{% url 'project_create' %}" style="margin-bottom: 10px;">Create One Now!</a>
+                        <h4 class="d-flex m-0 align-items-center justify-content-center">You have no projects!<a class="m-0 ms-5 btn btn-secondary" href="{% url 'project_create' %}" style="margin-bottom: 10px;">Create One Now!</a>
                         </h4>
                     {%endif%}
                   </div>

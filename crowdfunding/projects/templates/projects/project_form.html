@@ -118,14 +118,14 @@
         {%if edit %}Edit Project{%else%}Add Project{%endif%}
     </h2>
     <div
-        class="d-flex justify-content-center bg-light"
+        class="d-flex justify-content-center bg-dark text-light"
         style="min-height: 100vh; min-width: 500px"
     >
         <form class="w-75 py-5" method="POST" enctype="multipart/form-data">
             {% csrf_token %} {{ form|crispy }}
             <button
                 type="submit"
-                class="btn btn-primary text-white submit-button"
+                class="btn btn-secondary text-white submit-button"
             >
                 {%if edit %}Save Changes{%else%}Add Project{%endif%}
             </button>

@@ -29,10 +29,10 @@
         alt="thumbnail"
 /></a>
 
-<div class="card-body p-4">
+<div class="card-body px-1">
     <h3 style="text-overflow: ellipsis" class="text-nowrap overflow-hidden">
         <a
-            class="text-dark text-decoration-none"
+            class="text-secondary text-decoration-none"
             href="{% url 'project_detail' pk=project.id %}"
             >{{project.title}}</a
         >
@@ -52,7 +52,7 @@
             {% if project.expired %}
             <span class="badge bg-warning text-light">Expired</span>
             {% else %}
-            <span class="badge bg-success text-light">Active</span>
+            <span class="badge bg-secondary text-light">Active</span>
             {% endif %}
             <!--  -->
             {%if project.tags %}
@@ -80,7 +80,7 @@
     {% if inlist %}
     <a
         type="button"
-        class="btn btn-outline-dark"
+        class="btn btn-outline-secondary"
         href="{% url 'profile' pk=project.user.id %}"
     >
         <img
@@ -102,7 +102,7 @@
     </a>
     <a
         href="{% url 'donate' pk=project.id %}"
-        class="btn btn-success float-end fs-5"
+        class="btn btn-secondary float-end fs-5"
         >Donate Now</a
     >
     <br />

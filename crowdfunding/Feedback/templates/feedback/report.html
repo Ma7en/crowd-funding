@@ -10,13 +10,13 @@
     }
 
 </style>
-<div class="container py-5">
+<div class="container py-5 text-white">
 <h2 style="text-align: center">Add Report</h2>
-<div class="d-flex justify-content-center bg-light" style="min-height: 100vh;min-width: 500px;">
+<div class="d-flex justify-content-center text-white" style="min-height: 100vh;min-width: 500px;">
     <form id="project-create" class="w-75 py-5" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form|crispy }}
-        <button type="submit" class="btn btn-primary text-white submit-button">Add Report</button>
+        <button type="submit" class="btn btn-secondary text-white submit-button">Add Report</button>
     </form>
     
 </div>
